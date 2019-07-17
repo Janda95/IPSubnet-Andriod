@@ -1,3 +1,6 @@
+.project
+.settings/
+RCS/
 *.iml
 .gradle
 local.properties
