@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SubnetApp</string>
+    <string name="a">SubnetApp</string>
+    <string name="b">SubnetApp</string>
+    <string name="c">SubnetApp</string>
+    <string name="d">SubnetApp</string>
 </resources>

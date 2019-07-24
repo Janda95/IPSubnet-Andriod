@@ -6,8 +6,15 @@ public class SubNetCalculator {
   private String rootSubnetString = "NULL";
 
   public SubNetCalculator(){
+    //set rootSubnetString
 
+    //set rootSubnetInt
   }
 
+  public void divideIP(){
+
+    System.out.println();
+    System.out.println();
+  }
 
 }
