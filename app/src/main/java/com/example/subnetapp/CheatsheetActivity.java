@@ -14,7 +14,7 @@ public class CheatsheetActivity extends AppCompatActivity {
     setupTextView();
   }
 
-  private void setupTextView(){
+  private void setupTextView() {
     TextView textView = findViewById(R.id.contentTextView);
 
     String hostNumberInfo =
@@ -47,6 +47,4 @@ public class CheatsheetActivity extends AppCompatActivity {
 
     textView.setText(hostNumberInfo);
   }
-
-
 }
