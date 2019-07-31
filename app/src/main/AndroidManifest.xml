@@ -16,5 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".CheatsheetActivity"></activity>
+        <activity android:name=".SplitterActivity"></activity>
     </application>
 </manifest>
