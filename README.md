@@ -9,6 +9,7 @@ Current Version is not on app store and is currently a work in progress for pers
 - OS: Ubuntu 18.04.1 LTS
 - AndriodSDK Version: 
 - Minimum Target Version:
+- Google Java Style Guide
 
 # Devices Tested
 - Google Pixel 2 (Simulator)
