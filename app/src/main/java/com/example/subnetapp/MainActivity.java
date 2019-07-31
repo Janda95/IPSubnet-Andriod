@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
   Spinner spinner;
   AlertDialog.Builder builder;
   public static final String IP_MESSAGE = "com.example.IP.Message";
-  public static final String CIDR_NETMASK_MESSAGE = "com.NETMASK..Message";
+  public static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +61,10 @@ public class MainActivity extends AppCompatActivity {
     String spinnerItem = spinner.getSelectedItem().toString();
 
     //Intent
-    Intent intent = new Intent( this, SplitterActivity.class );
+    Intent intent = new Intent( this, SplitterActivity.class);
 
     intent.putExtra(IP_MESSAGE, message);
     intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
-
     startActivity(intent);
   }
 
@@ -78,11 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
     //String array to Integer array for checks
     Integer[] intArray = new Integer[4];
-    int index = 0;
     for (int i = 0; i < array.length; i++) {
       try {
-        intArray[index] = Integer.parseInt(array[i]);
-        index++;
+        intArray[i] = Integer.parseInt(array[i]);
       } catch (NumberFormatException nfe) {
         Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
         return false;
