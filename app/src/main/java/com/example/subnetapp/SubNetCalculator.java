@@ -37,7 +37,7 @@ public class SubNetCalculator {
     int localcidr = cidr;
 
     //make into binary formatted string
-    String binaryNum = String.format("%32s", Integer.toBinaryString(ipInt)).replace(' ', '0');
+    String binaryNum = String.format("%32s", Integer.toBinaryString(localip)).replace(' ', '0');
 
     System.out.println(binaryNum);
 

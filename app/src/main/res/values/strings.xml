@@ -4,6 +4,10 @@
     <string name="to_cheatsheet">SubnetApp</string>
     <string name="update">Update</string>
     <string name="enter_ip">IP</string>
-    <string name="dialog_message">Welcome to Alert Dialog</string>
-    <string name="dialog_title">Javatpoint Alert Dialog</string>
+    <string name="splitter_netmask">Current NetMask</string>
+    <string name="splitter_ip">Original Ip:</string>
+    <string name="splitter_upper"></string>
+    <string name="dialog_continue"></string>
+    <string name="dialog_cancel"></string>
+    <string name="dialog_title"></string>
 </resources>
