@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
   Spinner spinner;
   AlertDialog.Builder builder;
 
-  public static final String IP_STRING_MESSAGE = "com.example.IPSTRING.Message";
-  public static final String IP_INT_MESSAGE = "com.example.IPINT.Message";
-  public static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
+  protected static final String IP_STRING_MESSAGE = "com.example.IPSTRING.Message";
+  protected static final String IP_INT_MESSAGE = "com.example.IPINT.Message";
+  protected static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
