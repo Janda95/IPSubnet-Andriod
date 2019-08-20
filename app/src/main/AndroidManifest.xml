@@ -9,13 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".DescriptionActivity"
+            android:label="@string/title_activity_description"
+            android:parentActivityName=".SplitterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.subnetapp.SplitterActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheatsheetActivity"></activity>
-        <activity android:name=".SplitterActivity"></activity>
+        <activity android:name=".CheatsheetActivity" />
+        <activity android:name=".SplitterActivity" />
     </application>
+
 </manifest>
