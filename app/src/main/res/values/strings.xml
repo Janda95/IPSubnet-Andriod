@@ -10,4 +10,6 @@
     <string name="dialog_continue"></string>
     <string name="dialog_cancel"></string>
     <string name="dialog_title"></string>
+    <string name="title_activity_description">DescriptionActivity</string>
+    <string name="editor_information_placeholder">Editor Information Placeholder</string>
 </resources>
