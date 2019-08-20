@@ -3,11 +3,18 @@ package com.example.subnetapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class SplitterActivity extends AppCompatActivity {
 
-  SubNetCalculator SubnetCalc;
+  private static final int EDITOR_REQUEST_CODE = 1001;
+
+  protected static final String EXAMPLE_CONTENT = "";
+
+  private SubNetCalculator SubnetCalc;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +28,30 @@ public class SplitterActivity extends AppCompatActivity {
 
     SubnetCalc = new SubNetCalculator(ipString, cidrString, ipInt);
 
-    TextView textView2 = findViewById(R.id.display_message);
-    TextView textView3 = findViewById(R.id.display_binary_message);
-    TextView textView4 = findViewById(R.id.textView6);
+    ListView list = findViewById(R.id.android_list);
 
-    textView2.setText(Integer.toString(SubnetCalc.getBinaryNumber()));
-    String binaryNum = String.format("%32s", Integer.toBinaryString(SubnetCalc.getBinaryNumber())).replace(' ', '0');
-    textView3.setText(binaryNum);
-    textView4.setText(SubnetCalc.trimCidrIp());
+    final String[] localArray = {"1","2","3","4","5"};
+
+    ArrayAdapter aa = new IpArrayAdapter(this, localArray);
+    list.setAdapter(aa);
+
+    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //prepare item information to be passed to Description activity
+        String example = localArray[position];
+        Intent intent = new Intent(SplitterActivity.this, DescriptionActivity.class);
+        intent.putExtra(EXAMPLE_CONTENT, example);
+        startActivityForResult(intent, EDITOR_REQUEST_CODE);
+      }
+    });
   }
 
-
+  //use if decided to use Description Activity to split and merge IP addresses
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
+      //update ip class?
+    }*/
+  }
 }
