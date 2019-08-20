@@ -15,8 +15,10 @@ public class MainActivity extends AppCompatActivity {
 
   Spinner spinner;
   AlertDialog.Builder builder;
-  public static final String IP_MESSAGE = "com.example.IP.Message";
-  public static final String CIDR_NETMASK_MESSAGE = "com.NETMASK..Message";
+
+  protected static final String IP_STRING_MESSAGE = "com.example.IPSTRING.Message";
+  protected static final String IP_INT_MESSAGE = "com.example.IPINT.Message";
+  protected static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +62,14 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner = findViewById(R.id.subnet_spinner);
     String spinnerItem = spinner.getSelectedItem().toString();
 
+    int ipInt = ipStringToInt(message);
+
     //Intent
-    Intent intent = new Intent( this, SplitterActivity.class );
+    Intent intent = new Intent( this, SplitterActivity.class);
 
-    intent.putExtra(IP_MESSAGE, message);
+    intent.putExtra(IP_STRING_MESSAGE, message);
     intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
-
+    intent.putExtra(IP_INT_MESSAGE, ipInt);
     startActivity(intent);
   }
 
@@ -78,11 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
     //String array to Integer array for checks
     Integer[] intArray = new Integer[4];
-    int index = 0;
     for (int i = 0; i < array.length; i++) {
       try {
-        intArray[index] = Integer.parseInt(array[i]);
-        index++;
+        intArray[i] = Integer.parseInt(array[i]);
       } catch (NumberFormatException nfe) {
         Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
         return false;
@@ -107,4 +109,21 @@ public class MainActivity extends AppCompatActivity {
     }
     return true;
   }
+
+  public int ipStringToInt(String ip) {
+    String[] stringArray = ip.split("\\.");
+    Integer[] intArray = new Integer[4];
+    for (int i = 0; i < 4; i++) {
+      try {
+        intArray[i] = Integer.parseInt(stringArray[i]);
+      } catch (NumberFormatException nfe) {}
+    }
+
+    int decimalNum = intArray[3] + (intArray[2] * 256) + (intArray[1] * 65536) + (intArray[0] * 16777216);
+
+    return decimalNum;
+  }
+
+
+
 }
