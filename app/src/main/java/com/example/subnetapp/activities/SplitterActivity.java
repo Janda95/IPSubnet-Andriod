@@ -1,4 +1,4 @@
-package com.example.subnetapp;
+package com.example.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.subnetapp.adapters.IpArrayAdapter;
+import com.example.subnetapp.R;
+import com.example.subnetapp.models.SubNetCalculator;
 
 public class SplitterActivity extends AppCompatActivity {
 

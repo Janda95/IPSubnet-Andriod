@@ -1,4 +1,4 @@
-package com.example.subnetapp;
+package com.example.subnetapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.subnetapp.R;
 
 public class IpArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
