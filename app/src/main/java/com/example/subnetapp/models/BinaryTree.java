@@ -1,14 +1,14 @@
 package com.example.subnetapp.models;
 
 public class BinaryTree {
-  Node root;
+  public Node root;
 
-  BinaryTree(){
+  public BinaryTree(){
     root = null;
   }
   /* Given a binary tree, print its nodes according to the
       "bottom-up" postorder traversal. */
-  void printPostorder(Node node)
+  public void printPostorder(Node node)
   {
     if (node == null)
       return;
@@ -24,7 +24,7 @@ public class BinaryTree {
   }
 
   /* Given a binary tree, print its nodes in inorder*/
-  void printInorder(Node node)
+  public void printInorder(Node node)
   {
     if (node == null)
       return;
@@ -40,7 +40,7 @@ public class BinaryTree {
   }
 
   /* Given a binary tree, print its nodes in preorder*/
-  void printPreorder(Node node)
+  public void printPreorder(Node node)
   {
     if (node == null)
       return;
@@ -54,4 +54,10 @@ public class BinaryTree {
     /* now recur on right subtree */
     printPreorder(node.right);
   }
+
+  // Wrappers over above recursive functions
+  public void printPostorder()  {     printPostorder(root);  }
+  public void printInorder()    {     printInorder(root);   }
+  public void printPreorder()   {     printPreorder(root);  }
+
 }
