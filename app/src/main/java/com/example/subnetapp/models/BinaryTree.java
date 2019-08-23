@@ -1,11 +1,16 @@
 package com.example.subnetapp.models;
 
 public class BinaryTree {
-  public Node root;
+  private Node root;
 
   public BinaryTree(){
     root = null;
   }
+
+  public Node getRoot() {
+    return root;
+  }
+
   /* Given a binary tree, print its nodes according to the
       "bottom-up" postorder traversal. */
   public void printPostorder(Node node)
@@ -14,13 +19,13 @@ public class BinaryTree {
       return;
 
     // first recur on left subtree
-    printPostorder(node.left);
+    printPostorder(node.getLeft());
 
     // then recur on right subtree
-    printPostorder(node.right);
+    printPostorder(node.getRight());
 
     // now deal with the node
-    System.out.print(node.key + " ");
+    System.out.print(node.getKey() + " ");
   }
 
   /* Given a binary tree, print its nodes in inorder*/
@@ -30,13 +35,13 @@ public class BinaryTree {
       return;
 
     /* first recur on left child */
-    printInorder(node.left);
+    printInorder(node.getLeft());
 
     /* then print the data of node */
-    System.out.print(node.key + " ");
+    System.out.print(node.getKey() + " ");
 
     /* now recur on right child */
-    printInorder(node.right);
+    printInorder(node.getRight());
   }
 
   /* Given a binary tree, print its nodes in preorder*/
@@ -46,13 +51,13 @@ public class BinaryTree {
       return;
 
     /* first print data of node */
-    System.out.print(node.key + " ");
+    System.out.print(node.getKey() + " ");
 
     /* then recur on left sutree */
-    printPreorder(node.left);
+    printPreorder(node.getLeft());
 
     /* now recur on right subtree */
-    printPreorder(node.right);
+    printPreorder(node.getRight());
   }
 
   // Wrappers over above recursive functions
@@ -60,4 +65,7 @@ public class BinaryTree {
   public void printInorder()    {     printInorder(root);   }
   public void printPreorder()   {     printPreorder(root);  }
 
+  public void setRoot(int number) {
+    root = new Node(number);
+  }
 }
