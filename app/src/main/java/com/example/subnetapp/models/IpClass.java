@@ -1,4 +1,4 @@
-package com.example.subnetapp;
+package com.example.subnetapp.models;
 
 public class IpClass {
   public int ipInt;
