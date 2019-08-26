@@ -29,16 +29,37 @@ public class DescriptionActivity extends AppCompatActivity {
 
     System.out.println("\n");
 
-    System.out.println("Preorder traversal of binary tree is ");
+    /*System.out.println("Preorder traversal of binary tree is ");
     tree.printPreorder();
 
     System.out.println("\nInorder traversal of binary tree is ");
     tree.printInorder();
 
     System.out.println("\nPostorder traversal of binary tree is ");
-    tree.printPostorder();
+    tree.printPostorder();*/
+
+    Node[] array = new Node[7];
+
+    for(int i =0; i < array.length; i++) {
+      Node node = tree.NthPreordernode2(i);
+      array[i] = node;
+    }
 
     System.out.println("\n");
+
+    for(int i = 0; i < array.length; i++) {
+      if (array[i] == null) {
+        System.out.println("Failure to find Node!");
+      } else {
+        int temp = array[i].getKey();
+        System.out.println("This is returned node int: " + temp + "! YAY!");
+        System.out.println("\n");
+      }
+    }
+
+    System.out.println("\n");
+
+
   }
 
 }
