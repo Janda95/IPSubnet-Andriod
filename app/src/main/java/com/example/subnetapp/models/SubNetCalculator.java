@@ -1,6 +1,4 @@
-package com.example.subnetapp;
-
-import java.sql.Struct;
+package com.example.subnetapp.models;
 
 public class SubNetCalculator {
 

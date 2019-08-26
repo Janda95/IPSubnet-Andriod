@@ -1,4 +1,4 @@
-package com.example.subnetapp;
+package com.example.subnetapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.subnetapp.R;
 
 
 public class MainActivity extends AppCompatActivity {

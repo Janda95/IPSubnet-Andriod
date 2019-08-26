@@ -1,9 +1,11 @@
-package com.example.subnetapp;
+package com.example.subnetapp.activities;
 
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.example.subnetapp.R;
 
 public class CheatsheetActivity extends AppCompatActivity {
 

@@ -10,7 +10,7 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
     tools:actionBarNavMode="standard"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <ListView
         android:id="@+id/android_list"

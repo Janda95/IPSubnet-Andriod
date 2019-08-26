@@ -1,4 +1,4 @@
-package com.example.subnetapp;
+package com.example.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.subnetapp.adapters.IpArrayAdapter;
+import com.example.subnetapp.R;
+import com.example.subnetapp.models.SubNetCalculator;
 
 public class SplitterActivity extends AppCompatActivity {
 
@@ -28,6 +32,7 @@ public class SplitterActivity extends AppCompatActivity {
 
     SubnetCalc = new SubNetCalculator(ipString, cidrString, ipInt);
 
+    //example list implementation
     ListView list = findViewById(R.id.android_list);
 
     final String[] localArray = {"1","2","3","4","5"};
@@ -45,13 +50,13 @@ public class SplitterActivity extends AppCompatActivity {
         startActivityForResult(intent, EDITOR_REQUEST_CODE);
       }
     });
-  }
 
-  //use if decided to use Description Activity to split and merge IP addresses
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    /*if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
-      //update ip class?
-    }*/
+
+    // IP array adapter
+
+
+
+
+
   }
 }
