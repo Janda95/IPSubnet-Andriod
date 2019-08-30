@@ -1,6 +1,7 @@
 package com.example.subnetapp.models;
 
 public class BinaryTree {
+
   private Node root;
   private int flag = 0;
 
@@ -12,8 +13,8 @@ public class BinaryTree {
     return root;
   }
 
-  public void setRoot(int number) {
-    root = new Node(number);
+  public void setRoot(int cidr, String ipBinary, String ipAddress) {
+    root = new Node(cidr, ipBinary, ipAddress);
   }
 
   public void printPostorder(Node node) {
@@ -27,7 +28,7 @@ public class BinaryTree {
     printPostorder(node.getRight());
 
     // now deal with the node
-    System.out.print(node.getKey() + " ");
+    System.out.print(node.getCidr() + " ");
   }
 
   public void printInorder(Node node) {
@@ -38,7 +39,7 @@ public class BinaryTree {
     printInorder(node.getLeft());
 
     /* then print the data of node */
-    System.out.print(node.getKey() + " ");
+    System.out.print(node.getCidr() + " ");
 
     /* now recur on right child */
     printInorder(node.getRight());
@@ -49,7 +50,7 @@ public class BinaryTree {
       return;
 
     /* first print data of node */
-    System.out.print(node.getKey() + " ");
+    System.out.print(node.getCidr() + " ");
 
     /* then recur on left sutree */
     printPreorder(node.getLeft());
@@ -89,14 +90,33 @@ public class BinaryTree {
     return null;
   }
 
+  private void size(Node node) {
+    if (node == null){
+      return;
+    }
+
+    flag ++;
+
+    size(node.getLeft());
+    size(node.getRight());
+  }
+
   // Wrappers over above recursive functions
   public void printPostorder() { printPostorder(root); }
   public void printInorder() { printInorder(root); }
   public void printPreorder() { printPreorder(root); }
+
+  public int size() {
+    size(root);
+    int value = flag;
+    flag = 0;
+    return value;
+  }
 
   public Node nthPreordernode(int N) {
     Node node = nthPreordernode(root, N);
     flag = 0;
     return node;
   }
+
 }

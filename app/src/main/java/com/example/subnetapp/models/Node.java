@@ -2,23 +2,40 @@ package com.example.subnetapp.models;
 
 public class Node {
   //values
-  /*public int cidr;
+  public String ipAddress;
+  public int cidr;
   public String ipBinary;
-  public String formatedIp;*/
-
-  private int key;
 
   private Node left;
   private Node right;
 
-  public Node(int item){
-    key = item;
+  //Constructors
+  public Node(int cidr, String ipBinary, String ipAddress) {
+
+    this.cidr = cidr;
+    this.ipBinary = ipBinary;
+    this.ipAddress = ipAddress;
+
     left = null;
     right = null;
   }
 
-  public int getKey(){
-    return key;
+  //setters
+  public void setLeft(int cidr, String ipBinary, String ipAddress){
+    left = new Node(cidr, ipBinary, ipAddress);
+  }
+
+  public void setRight(int cidr, String ipBinary, String ipAddress){
+    right = new Node(cidr, ipBinary, ipAddress);
+  }
+
+  //getters
+  public int getCidr(){
+    return cidr;
+  }
+
+  public String getIpBinary(){
+    return ipBinary;
   }
 
   public Node getLeft(){
@@ -27,14 +44,6 @@ public class Node {
 
   public Node getRight(){
     return right;
-  }
-
-  public void setLeft(int number){
-    left = new Node(number);
-  }
-
-  public void setRight(int number){
-    right = new Node(number);
   }
 
 }

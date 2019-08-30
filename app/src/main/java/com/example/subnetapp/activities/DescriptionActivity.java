@@ -21,11 +21,13 @@ public class DescriptionActivity extends AppCompatActivity {
     textView.setText((String) intent.getStringExtra(SplitterActivity.EXAMPLE_CONTENT));
 
     BinaryTree tree = new BinaryTree();
-    tree.setRoot(1);
+    /*tree.setRoot(1);
     tree.getRoot().setLeft(2);
     tree.getRoot().setRight(3);
     tree.getRoot().getLeft().setLeft(4);
     tree.getRoot().getLeft().setRight(5);
+    tree.getRoot().getRight().setLeft(6);
+    tree.getRoot().getRight().setRight(7);*/
 
     System.out.println("\n");
 
@@ -41,7 +43,7 @@ public class DescriptionActivity extends AppCompatActivity {
     tree.printPostorder();
     */
 
-    Node[] array = new Node[7];
+    /*Node[] array = new Node[8];
 
     for (int i = 0; i < array.length; i++) {
       Node node = tree.nthPreordernode(i);
@@ -55,12 +57,14 @@ public class DescriptionActivity extends AppCompatActivity {
       if (array[i] == null) {
         System.out.println("Null");
       } else {
-        int num = array[i].getKey();
+        int num = array[i].getCidr();
         System.out.println(num);
         System.out.println("\n");
       }
     }
+    System.out.println(tree.size());
+    System.out.println("\n");*/
 
-    System.out.println("\n");
+
   }
 }

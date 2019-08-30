@@ -2,46 +2,24 @@ package com.example.subnetapp.models;
 
 public class SubNetCalculator {
 
-  private String rootSubnetString;
-  private int rootSubnetBinary;
-  private int cidr;
-  private int ipInt;
-
-  private IpClass ipClass;
 
   //For using functions in SplitterActivity
-  public SubNetCalculator(String ip, String cidr, int ipNum) {
-    try {
-      this.cidr = Integer.parseInt(cidr);
-      ipInt = ipNum;
-    } catch (NumberFormatException nfe) {}
-    rootSubnetString = ip;
-
-    ipClass = new IpClass(ipInt, this.cidr, ip);
-
-  }
-
-  public int getBinaryNumber() {
-    return ipInt;
-  }
-
-  public int getCidr() {
-    return cidr;
+  public SubNetCalculator(){
   }
 
   public int ipToCidrIp(int aCidr, int ip){
-    int localip = ip;
-    int localcidr = aCidr;
+    int ipInt = ip;
+    int cidr = aCidr;
 
     //make into binary formatted string
-    String binaryNum = String.format("%32s", Integer.toBinaryString(localip)).replace(' ', '0');
+    String binaryNum = String.format("%32s", Integer.toBinaryString(ipInt)).replace(' ', '0');
 
     System.out.println(binaryNum);
 
     StringBuilder builderBinaryNum = new StringBuilder(binaryNum);
 
     //change binary string substring to 0 after cidr
-    for(int i = localcidr; i < binaryNum.length(); i++) {
+    for(int i = cidr; i < binaryNum.length(); i++) {
       builderBinaryNum.setCharAt(i, '0');
     }
 
@@ -53,28 +31,62 @@ public class SubNetCalculator {
     return 0;
   }
 
-  public String trimCidrIp(){
-    int localip = ipInt;
-    int localcidr = cidr;
+  public String trimCidrIp(String ip, int cidr){
 
     //make into binary formatted string
-    String binaryNum = String.format("%32s", Integer.toBinaryString(localip)).replace(' ', '0');
-
-    System.out.println(binaryNum);
+    String binaryNum = ip;
 
     StringBuilder builderBinaryNum = new StringBuilder(binaryNum);
 
     //change binary string substring to 0 after cidr
-    for(int i = localcidr; i < binaryNum.length(); i++) {
+    for(int i = cidr; i < binaryNum.length(); i++) {
       builderBinaryNum.setCharAt(i, '0');
     }
 
     binaryNum = builderBinaryNum.toString();
 
-    //change back into int
-    System.out.println(binaryNum);
+    return binaryNum;
+  }
+
+  public String ipFormatToBinary(String ip) {
+    String[] stringArray = ip.split("\\.");
+    Integer[] intArray = new Integer[4];
+    for (int i = 0; i < 4; i++) {
+      try {
+        intArray[i] = Integer.parseInt(stringArray[i]);
+      } catch (NumberFormatException nfe) {}
+    }
+
+    int decimalNum = intArray[3] + (intArray[2] * 256) + (intArray[1] * 65536) + (intArray[0] * 16777216);
+    String binaryNum = String.format("%32s", Integer.toBinaryString(decimalNum)).replace(' ', '0');
 
     return binaryNum;
   }
+
+  public String ipBinaryToFormat(String ipBinary){
+
+    String[] arr = new String[4];
+
+    for(int i = 0; i < arr.length; i++) {
+      String temp = ipBinary.substring(i*8, (i*8)+8);
+      int number = Integer.parseInt(temp, 2);
+      String ipInt = Integer.toString(number);
+      arr[i] = ipInt;
+    }
+
+    String ipFormat = arr[0] + "." + arr[1] + "." + arr[2] + "." + arr[3];
+
+    return ipFormat;
+  }
+
+  public String ipSplit(String ipBinary, int cidr) {
+
+    //assuming check that cidr is not 32
+    char[] splitOne = ipBinary.toCharArray();
+    splitOne[cidr] = '1';
+    String value = new String(splitOne);
+    return value;
+  }
+
 
 }

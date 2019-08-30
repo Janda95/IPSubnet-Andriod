@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.R;
+import com.example.subnetapp.models.BinaryTree;
 import com.example.subnetapp.models.SubNetCalculator;
 
 public class SplitterActivity extends AppCompatActivity {
@@ -17,20 +18,25 @@ public class SplitterActivity extends AppCompatActivity {
   private static final int EDITOR_REQUEST_CODE = 1001;
 
   protected static final String EXAMPLE_CONTENT = "";
-
-  private SubNetCalculator SubnetCalc;
+  SubNetCalculator subNetCalc;
+  BinaryTree tree;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splitter);
 
-    Intent intent = getIntent();
-    String ipString = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
-    int ipInt = intent.getIntExtra(MainActivity.IP_INT_MESSAGE, 0);
-    String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
+    subNetCalc = new SubNetCalculator();
 
-    SubnetCalc = new SubNetCalculator(ipString, cidrString, ipInt);
+    Intent intent = getIntent();
+    String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
+    String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
+    int cidr = Integer.parseInt(cidrString);
+    String ipBinary = subNetCalc.ipFormatToBinary(ipFormatted);
+    String cutBinary = subNetCalc.trimCidrIp(ipBinary, cidr);
+
+    tree = new BinaryTree();
+    tree.setRoot(cidr, cutBinary, ipFormatted);
 
     //example list implementation
     ListView list = findViewById(R.id.android_list);
@@ -50,13 +56,5 @@ public class SplitterActivity extends AppCompatActivity {
         startActivityForResult(intent, EDITOR_REQUEST_CODE);
       }
     });
-
-
-    // IP array adapter
-
-
-
-
-
   }
 }
