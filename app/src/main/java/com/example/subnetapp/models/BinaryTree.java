@@ -101,6 +101,20 @@ public class BinaryTree {
     size(node.getRight());
   }
 
+  private void sizeBottomLayer(Node node){
+    if(node == null){
+      return;
+    }
+
+    if (node.getLeft() == null && node.getRight() == null){
+      flag++;
+    }
+
+    sizeBottomLayer(node.getLeft());
+    sizeBottomLayer(node.getRight());
+  }
+
+
   // Wrappers over above recursive functions
   public void printPostorder() { printPostorder(root); }
   public void printInorder() { printInorder(root); }
@@ -108,6 +122,13 @@ public class BinaryTree {
 
   public int size() {
     size(root);
+    int value = flag;
+    flag = 0;
+    return value;
+  }
+
+  public int sizeBottomLayer() {
+    sizeBottomLayer(root);
     int value = flag;
     flag = 0;
     return value;

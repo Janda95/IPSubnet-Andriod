@@ -38,6 +38,10 @@ public class Node {
     return ipBinary;
   }
 
+  public String getIpAddress(){
+    return ipAddress;
+  }
+
   public Node getLeft(){
     return left;
   }
