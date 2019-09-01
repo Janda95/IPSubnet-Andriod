@@ -61,10 +61,10 @@ public class SplitterActivity extends AppCompatActivity {
 
     builder = new AlertDialog.Builder(this);
 
-    builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
+    builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
     //Setting message manually and performing action on button click
-    builder.setMessage("Do you want to close this application ?")
+    builder.setMessage("What would you like to do?")
         .setCancelable(false)
         .setPositiveButton("Split", new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int id) {
@@ -175,7 +175,7 @@ public class SplitterActivity extends AppCompatActivity {
     nodeIps = new String[nodes.length];
 
     for(int i = 0; i < nodes.length; i++){
-      nodeIps[i] = nodes[i].getIpAddress();
+      nodeIps[i] = nodes[i].getIpAddress() + "   /" + nodes[i].getCidr();
     }
 
     ArrayAdapter aa = new IpArrayAdapter(this, nodeIps);
@@ -197,7 +197,7 @@ public class SplitterActivity extends AppCompatActivity {
     for(int i = 0; i < nodes.length; i++) {
       Node node = nodes[i];
       if(node.getLeft() == null && node.getRight() == null){
-        nodeIps[counter] = node.getIpAddress();
+        nodeIps[counter] = node.getIpAddress() + "    /" +  node.getCidr();
         nodeLocations[counter] = i;
         counter++;
       }
