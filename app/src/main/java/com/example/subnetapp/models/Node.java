@@ -50,4 +50,9 @@ public class Node {
     return right;
   }
 
+  public void setChildrenNull(){
+    left = null;
+    right = null;
+  }
+
 }

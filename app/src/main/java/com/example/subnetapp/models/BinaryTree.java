@@ -114,6 +114,50 @@ public class BinaryTree {
     sizeBottomLayer(node.getRight());
   }
 
+  public Node findParent(Node node, Node child){
+    if (node == null) {
+      return null;
+    }
+
+    // returns the n-th node of preorder traversal
+    if (node.getLeft() == child || node.getRight() == child){
+      return node;
+    }
+
+    // left recursion
+    Node returnedNode = findParent(node.getLeft(), child);
+
+    if (returnedNode == null){
+      // right recursion
+      returnedNode = findParent(node.getRight(), child);
+    } else {
+      return returnedNode;
+    }
+
+    if (returnedNode != null) {
+      return returnedNode;
+    }
+
+    return null;
+  }
+
+  public void merge(Node node){
+    if (node == null) {
+      return;
+    }
+    Node left = node.getLeft();
+    Node right = node.getRight();
+
+    if ( left == null && right == null) {
+      return;
+    }
+
+    merge(node.getLeft());
+    merge(node.getRight());
+
+    node.setChildrenNull();
+  }
+
 
   // Wrappers over above recursive functions
   public void printPostorder() { printPostorder(root); }
@@ -137,6 +181,11 @@ public class BinaryTree {
   public Node nthPreordernode(int N) {
     Node node = nthPreordernode(root, N);
     flag = 0;
+    return node;
+  }
+
+  public Node findParent(Node child) {
+    Node node = findParent(root, child);
     return node;
   }
 
