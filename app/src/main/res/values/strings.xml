@@ -12,4 +12,5 @@
     <string name="dialog_title"></string>
     <string name="title_activity_description">DescriptionActivity</string>
     <string name="editor_information_placeholder">Editor Information Placeholder</string>
+    <string name="dialog_message">Split Builder</string>
 </resources>

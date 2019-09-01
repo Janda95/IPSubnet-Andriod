@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.subnetapp.R;
+import com.example.subnetapp.models.Node;
 
 public class IpArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
