@@ -1,6 +1,6 @@
 # IPSubnet-Andriod
 Summary:
-Andriod application for viewing, calculating, and displaying split IP addresses on a mobile device.
+Andriod application for viewing, calculating, and displaying split IP addresses on a mobile android device.
 
 Disclaimer:
 Current Version is not on app store and is currently a work in progress for personal use. If you would like to download and modify this code for personal use then feel free! This is a personal project for my father who requested an application for a subnet calculator drawing inspiration from a web application that does something similar.
@@ -29,5 +29,5 @@ Current Version is not on app store and is currently a work in progress for pers
 - Developer Mode
 
 # Contributers
-- Jarek Rettinghouse (Janda95)
-- Nick Rettinghouse ()
+- Jarek Rettinghouse (Janda95) Developer / Project Owner
+- Nick Rettinghouse () User Feedback
