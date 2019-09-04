@@ -18,6 +18,5 @@ public class DescriptionActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
     TextView textView = findViewById(R.id.editText);
-    textView.setText((String) intent.getStringExtra(SplitterActivity.EXAMPLE_CONTENT));
   }
 }

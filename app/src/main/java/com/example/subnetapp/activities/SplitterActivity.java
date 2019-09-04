@@ -11,17 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.R;
+import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.models.BinaryTree;
 import com.example.subnetapp.models.Node;
 import com.example.subnetapp.models.SubNetCalculator;
 
 public class SplitterActivity extends AppCompatActivity {
-
-  private static final int EDITOR_REQUEST_CODE = 1001;
-  protected static final String EXAMPLE_CONTENT = "";
-
 
   SubNetCalculator subNetCalc;
   BinaryTree tree;
@@ -29,7 +25,9 @@ public class SplitterActivity extends AppCompatActivity {
   private Node[] nodes;
   private String[] nodeIps;
   private int[] nodeLocations = null;
+  private int[] cidrArr;
   private int pos = -1;
+
 
   AlertDialog.Builder builder;
   AlertDialog alert;
@@ -98,16 +96,9 @@ public class SplitterActivity extends AppCompatActivity {
         alert.show();
       }
     });
-
-    //On long click
-    list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-      @Override
-      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        return false;
-      }
-    });
   }
 
+  //finds parent node and tells parent remove
   private void merge() {
     Node node;
 
@@ -173,12 +164,14 @@ public class SplitterActivity extends AppCompatActivity {
   private void refreshListAll(){
     nodes = new Node[tree.size()];
     nodeIps = new String[nodes.length];
+    cidrArr = new int[nodes.length];
 
     for(int i = 0; i < nodes.length; i++){
-      nodeIps[i] = nodes[i].getIpAddress() + "   /" + nodes[i].getCidr();
+      nodeIps[i] = nodes[i].getIpAddress();
+      cidrArr[i] = nodes[i].getCidr();
     }
 
-    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps);
+    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps, cidrArr);
     list.setAdapter(aa);
   }
 
@@ -187,6 +180,8 @@ public class SplitterActivity extends AppCompatActivity {
     nodes = new Node[tree.size()];
     nodeIps = new String[tree.sizeBottomLayer()];
     nodeLocations = new int[nodeIps.length];
+    cidrArr = new int[nodeIps.length];
+
 
     for(int i = 0; i < nodes.length; i++){
       nodes[i] = tree.nthPreordernode(i+1);
@@ -197,13 +192,14 @@ public class SplitterActivity extends AppCompatActivity {
     for(int i = 0; i < nodes.length; i++) {
       Node node = nodes[i];
       if(node.getLeft() == null && node.getRight() == null){
-        nodeIps[counter] = node.getIpAddress() + "    /" +  node.getCidr();
+        nodeIps[counter] = node.getIpAddress();
+        cidrArr[counter] = node.getCidr();
         nodeLocations[counter] = i;
         counter++;
       }
     }
 
-    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps);
+    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps, cidrArr);
     list.setAdapter(aa);
   }
 }
