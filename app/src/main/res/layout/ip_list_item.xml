@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customIpListItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -7,22 +10,44 @@
 
     <ImageView
         android:id="@+id/imageListIcon"
-        android:contentDescription="IpItem"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/baseline_format_list_bulleted_black_18"/>
+        android:contentDescription="IpItem"
+        android:src="@drawable/baseline_format_list_bulleted_black_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_wrapHeight="95"
+        tools:layout_conversion_wrapWidth="95" />
 
     <TextView
         android:id="@+id/tvIpItem"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="4dp"
-        android:layout_toEndOf="@+id/imageListIcon"
-        android:layout_toRightOf="@+id/imageListIcon"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:singleLine="true"
+        android:textAlignment="viewStart"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/cidrIpItem"
+        app:layout_constraintLeft_toRightOf="@+id/imageListIcon"
+        app:layout_constraintStart_toEndOf="@+id/imageListIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_wrapHeight="63"
+        tools:layout_conversion_wrapWidth="0" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/cidrIpItem"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:singleLine="true"
+        android:textSize="18sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_wrapHeight="63"
+        tools:layout_conversion_wrapWidth="210" />
+
+</android.support.constraint.ConstraintLayout>
