@@ -20,16 +20,28 @@ public class DescriptionActivity extends AppCompatActivity {
     subNetCalc = new SubNetCalculator();
 
     Intent intent = getIntent();
-    TextView textView = findViewById(R.id.cidrTextView);
-    TextView textView3 = findViewById(R.id.textView3);
-    TextView textView4 = findViewById(R.id.textView4);
+    TextView textView = findViewById( R.id.cidrTv );
+    TextView textView3 = findViewById( R.id.binaryTv );
+    TextView textView4 = findViewById( R.id.netmaskTv );
+    TextView textView5 = findViewById( R.id.ipTv );
+    TextView textView6 = findViewById( R.id.hostsTv );
 
-    int cidr = intent.getIntExtra(SplitterActivity.CIDR_MESSAGE, -1);
-    String address = intent.getStringExtra(SplitterActivity.ADDRESS_MESSAGE);
-    String binaryIp = intent.getStringExtra(SplitterActivity.BINARY_IP_MESSAGE);
+    int cidr = intent.getIntExtra( SplitterActivity.CIDR_MESSAGE, -1 );
+    String address = intent.getStringExtra( SplitterActivity.ADDRESS_MESSAGE );
+    String binaryIp = intent.getStringExtra( SplitterActivity.BINARY_IP_MESSAGE) ;
 
-    textView.setText(address);
-    textView3.setText(binaryIp);
-    textView4.setText(String.valueOf(cidr));
+    String subnetMask = subNetCalc.subnetMask( cidr );
+    int numHosts = subNetCalc.numberOfHosts( cidr );
+
+    String cidrString = "Cidr: /" + cidr;
+    String netmaskStr = "Netmask: " + subnetMask;
+    String ipStr = "Ip address: " + address;
+    String numHostsStr = "Number of hosts: " + numHosts;
+
+    textView.setText( cidrString );
+    textView3.setText( binaryIp );
+    textView4.setText( netmaskStr );
+    textView5.setText( ipStr );
+    textView6.setText( numHostsStr );
   }
 }
