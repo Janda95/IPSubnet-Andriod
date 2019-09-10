@@ -116,4 +116,46 @@ public class SubNetCalculator {
     }
   }
 
+  public String rangeOfAddresses(String ipBinary, int cidr) {
+    String start = ipBinaryToFormat(ipBinary);
+    if(cidr == 32){
+      return start;
+    }
+
+    int num = 32 - cidr;
+    int allHosts = (int) Math.pow(2, num) - 1;
+
+    long startInt = Long.parseLong(ipBinary,2);
+    long endInt = startInt + allHosts;
+    String endBin = String.format("%32s", Integer.toBinaryString((int) endInt)).replace(' ', '0');
+    String end = ipBinaryToFormat(endBin);
+
+    return start + " - " + end;
+  }
+
+  public String usableIpAddresses(String ipBinary, int cidr) {
+    if(cidr == 32){
+      ipBinaryToFormat(ipBinary);
+      return ipBinaryToFormat(ipBinary);
+    }
+
+    int num = 32 - cidr;
+    int allHosts = (int) Math.pow(2, num) -1;
+
+    long startInt = Long.parseLong(ipBinary,2);
+    long endInt = startInt + allHosts;
+
+    if(cidr < 31) {
+      startInt++;
+      endInt--;
+    }
+
+    String startBin = String.format("%32s", Integer.toBinaryString((int) startInt)).replace(' ', '0');
+    String start = ipBinaryToFormat(startBin);
+    String endBin = String.format("%32s", Integer.toBinaryString((int) endInt)).replace(' ', '0');
+    String end = ipBinaryToFormat(endBin);
+
+    return start + " - " + end;
+  }
+
 }
