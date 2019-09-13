@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customIpListItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
         android:layout_marginEnd="8dp"
         android:singleLine="true"
         android:textAlignment="viewStart"
-        android:textColor="#000000"
+        android:textColor="@color/colorDefaultText"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/cidrIpItem"
         app:layout_constraintLeft_toRightOf="@+id/imageListIcon"
@@ -41,8 +42,22 @@
         android:layout_marginTop="4dp"
         android:layout_marginRight="4dp"
         android:singleLine="true"
+        android:textColor="@color/colorSecondaryText"
         android:textSize="18sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hostsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/hosts_tv_ip_item"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageListIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvIpItem" />
 
 </android.support.constraint.ConstraintLayout>
