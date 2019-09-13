@@ -1,5 +1,6 @@
 package com.example.subnetapp.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,6 @@ public class DescriptionActivity extends AppCompatActivity {
     subNetCalc = new SubNetCalculator();
 
     Intent intent = getIntent();
-    TextView textView = findViewById( R.id.cidrTv );
     TextView textView3 = findViewById( R.id.broadcastTv);
     TextView textView4 = findViewById( R.id.netmaskTv );
     TextView textView5 = findViewById( R.id.ipTv );
@@ -30,7 +30,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     int cidr = intent.getIntExtra( SplitterActivity.CIDR_MESSAGE, -1 );
     String address = intent.getStringExtra( SplitterActivity.ADDRESS_MESSAGE );
-    String binaryIp = intent.getStringExtra( SplitterActivity.BINARY_IP_MESSAGE) ;
+    String binaryIp = intent.getStringExtra( SplitterActivity.BINARY_IP_MESSAGE);
 
     String ipMask = subNetCalc.subnetMask( cidr );
     int numHosts = subNetCalc.numberOfHosts( cidr );
@@ -39,14 +39,12 @@ public class DescriptionActivity extends AppCompatActivity {
     String broadcast = subNetCalc.broadcastAddress(binaryIp, cidr);
 
     String broadcastString = "Broadcast: " + broadcast;
-    String cidrString = "Cidr: /" + cidr;
-    String netmaskStr = "Netmask: " + ipMask;
-    String ipStr = "Ip address: " + address;
-    String numHostsStr = "Number of hosts: " + numHosts;
-    String range = "Range: " + ipRange;
-    String usable = "Usable Ips: " + usableRange;
+    String netmaskStr = ipMask;
+    String ipStr = address + "/" + cidr;
+    String numHostsStr = "" + numHosts;
+    String range = ipRange;
+    String usable = usableRange;
 
-    textView.setText( cidrString );
     textView3.setText( broadcastString );
     textView4.setText( netmaskStr );
     textView5.setText( ipStr );
