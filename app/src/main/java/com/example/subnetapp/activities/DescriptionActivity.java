@@ -21,7 +21,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
     TextView textView = findViewById( R.id.cidrTv );
-    TextView textView3 = findViewById( R.id.binaryTv );
+    TextView textView3 = findViewById( R.id.broadcastTv);
     TextView textView4 = findViewById( R.id.netmaskTv );
     TextView textView5 = findViewById( R.id.ipTv );
     TextView textView6 = findViewById( R.id.hostsTv );
@@ -36,7 +36,9 @@ public class DescriptionActivity extends AppCompatActivity {
     int numHosts = subNetCalc.numberOfHosts( cidr );
     String ipRange = subNetCalc.rangeOfAddresses(binaryIp, cidr);
     String usableRange = subNetCalc.usableIpAddresses(binaryIp, cidr);
+    String broadcast = subNetCalc.broadcastAddress(binaryIp, cidr);
 
+    String broadcastString = "Broadcast: " + broadcast;
     String cidrString = "Cidr: /" + cidr;
     String netmaskStr = "Netmask: " + ipMask;
     String ipStr = "Ip address: " + address;
@@ -45,7 +47,7 @@ public class DescriptionActivity extends AppCompatActivity {
     String usable = "Usable Ips: " + usableRange;
 
     textView.setText( cidrString );
-    textView3.setText( binaryIp );
+    textView3.setText( broadcastString );
     textView4.setText( netmaskStr );
     textView5.setText( ipStr );
     textView6.setText( numHostsStr );

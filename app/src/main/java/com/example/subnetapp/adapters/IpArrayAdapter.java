@@ -28,10 +28,13 @@ public class IpArrayAdapter extends ArrayAdapter<String> {
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     View rowView = inflater.inflate(R.layout.ip_list_item, parent, false);
     TextView textView = (TextView) rowView.findViewById(R.id.tvIpItem);
-    ImageView imageView = (ImageView) rowView.findViewById(R.id.imageListIcon);
+    //ImageView imageView = (ImageView) rowView.findViewById(R.id.imageListIcon);
     TextView textView2 = (TextView) rowView.findViewById(R.id.cidrIpItem);
+
+    String cidrStr = Integer.toString(cidrArr[position]);
+
     textView.setText(values[position]);
-    textView2.setText("/" + Integer.toString(cidrArr[position]));
+    textView2.setText("/" + cidrStr);
 
     return rowView;
   }

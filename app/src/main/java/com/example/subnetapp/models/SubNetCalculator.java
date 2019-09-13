@@ -158,4 +158,21 @@ public class SubNetCalculator {
     return start + " - " + end;
   }
 
+  public String broadcastAddress(String ipBinary, int cidr){
+    if(cidr == 32){
+      ipBinaryToFormat(ipBinary);
+      return ipBinaryToFormat(ipBinary);
+    }
+
+    int num = 32 - cidr;
+    int allHosts = (int) Math.pow(2, num) -1;
+
+
+    long startInt = Long.parseLong(ipBinary,2);
+    long endInt = startInt + allHosts;
+    String endBin = String.format("%32s", Integer.toBinaryString((int) endInt)).replace(' ', '0');
+    String end = ipBinaryToFormat(endBin);
+    return end;
+  }
+
 }

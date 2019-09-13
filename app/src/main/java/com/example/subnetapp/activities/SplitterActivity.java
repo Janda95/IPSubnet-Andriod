@@ -146,6 +146,7 @@ public class SplitterActivity extends AppCompatActivity {
     mAdapter = new SwipeActionAdapter(aa);
     mAdapter.setListView(list);
     list.setAdapter(mAdapter);
+    //mAdapter.notifyDataSetChanged();
 
     setSwipeFunctionality();
   }
