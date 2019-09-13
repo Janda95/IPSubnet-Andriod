@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
   //Transition to Splitter View
   public void subnetTransition(View view) {
     //Get Text From View
-    EditText editText = findViewById(R.id.editText);
+    EditText editText = findViewById(R.id.ipEntryTv);
     String message = editText.getText().toString();
     String[] ipArray = message.split("\\.");
 

@@ -9,16 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.subnetapp.R;
-import com.example.subnetapp.models.Node;
 
 public class IpArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
   private final String[] values;
+  private final int[] cidrArr;
+  private final int[] hosts;
 
-  public IpArrayAdapter(Context context, String[] values) {
+  public IpArrayAdapter(Context context, String[] values, int[] cidr, int[] hosts) {
     super(context, -1, values);
     this.context = context;
     this.values = values;
+    this.cidrArr = cidr;
+    this.hosts = hosts;
   }
 
   @Override
@@ -27,12 +30,16 @@ public class IpArrayAdapter extends ArrayAdapter<String> {
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     View rowView = inflater.inflate(R.layout.ip_list_item, parent, false);
     TextView textView = (TextView) rowView.findViewById(R.id.tvIpItem);
-    ImageView imageView = (ImageView) rowView.findViewById(R.id.imageListIcon);
-    textView.setText(values[position]);
+    //ImageView imageView = (ImageView) rowView.findViewById(R.id.imageListIcon);
+    TextView textView2 = (TextView) rowView.findViewById(R.id.cidrIpItem);
+    TextView textView3 = rowView.findViewById(R.id.hostsTv);
 
-    //Each row at position in row
-    //String s = values[position];
-    //example if s = thing1 then imageView = otherPicResource
+    String cidrStr = Integer.toString(cidrArr[position]);
+    String hostsStr = "Usable Hosts: " + hosts[position];
+
+    textView.setText(values[position]);
+    textView2.setText("/" + cidrStr);
+    textView3.setText(hostsStr);
 
     return rowView;
   }

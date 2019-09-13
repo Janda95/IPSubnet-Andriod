@@ -1,28 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customIpListItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:padding="4dp">
+    android:padding="4dp"
+    android:background="#ffffff">
 
     <ImageView
         android:id="@+id/imageListIcon"
-        android:contentDescription="IpItem"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/baseline_format_list_bulleted_black_18"/>
+        android:contentDescription="IpImage"
+        android:src="@drawable/baseline_format_list_bulleted_black_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/tvIpItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:singleLine="true"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorDefaultText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/cidrIpItem"
+        app:layout_constraintLeft_toRightOf="@+id/imageListIcon"
+        app:layout_constraintStart_toEndOf="@+id/imageListIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cidrIpItem"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:singleLine="true"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="18sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hostsTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="4dp"
-        android:layout_toEndOf="@+id/imageListIcon"
-        android:layout_toRightOf="@+id/imageListIcon"
-        android:singleLine="true"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/hosts_tv_ip_item"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageListIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvIpItem" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

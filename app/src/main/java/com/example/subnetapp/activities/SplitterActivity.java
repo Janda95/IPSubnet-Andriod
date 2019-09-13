@@ -1,27 +1,25 @@
 package com.example.subnetapp.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.R;
+import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.models.BinaryTree;
 import com.example.subnetapp.models.Node;
 import com.example.subnetapp.models.SubNetCalculator;
+import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
+import com.wdullaer.swipeactionadapter.SwipeDirection;
 
 public class SplitterActivity extends AppCompatActivity {
 
-  private static final int EDITOR_REQUEST_CODE = 1001;
-  protected static final String EXAMPLE_CONTENT = "";
-
+  protected static final String BINARY_IP_MESSAGE = "com.example.BINARYIP.Message";
+  protected static final String ADDRESS_MESSAGE = "com.example.ADDRESS.MESSAGE";
+  protected static final String CIDR_MESSAGE = "com.example.CIDR.MESSAGE";
 
   SubNetCalculator subNetCalc;
   BinaryTree tree;
@@ -29,11 +27,12 @@ public class SplitterActivity extends AppCompatActivity {
   private Node[] nodes;
   private String[] nodeIps;
   private int[] nodeLocations = null;
+  private int[] cidrArr;
+  private int[] numOfHostsArr;
   private int pos = -1;
 
-  AlertDialog.Builder builder;
-  AlertDialog alert;
   private ListView list;
+  SwipeActionAdapter mAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,78 +44,43 @@ public class SplitterActivity extends AppCompatActivity {
     Intent intent = getIntent();
     String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
     String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
+
     int cidr = Integer.parseInt(cidrString);
     String ipBinary = subNetCalc.ipFormatToBinary(ipFormatted);
     String cutBinary = subNetCalc.trimCidrIp(ipBinary, cidr);
+    ipFormatted = subNetCalc.ipBinaryToFormat(cutBinary);
+    int numOfHosts = subNetCalc.numberOfHosts(cidr);
 
     tree = new BinaryTree();
-    tree.setRoot(cidr, cutBinary, ipFormatted);
+    tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts);
 
     //tree list implementation
     list = findViewById(R.id.android_list);
 
-    //refreshListAll for all nodes XOR refreshListBottom for bottom layer nodes
-    //refreshListAll();
     refreshListBottom();
 
-    builder = new AlertDialog.Builder(this);
-
-    builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-
-    //Setting message manually and performing action on button click
-    builder.setMessage("What would you like to do?")
-        .setCancelable(false)
-        .setPositiveButton("Split", new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int id) {
-            //finish();
-            split();
-            dialog.cancel();
-          }
-        })
-        .setNeutralButton("Merge", new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int id) {
-            //  Action for 'NO' Button
-            merge();
-            dialog.cancel();
-          }
-        })
-        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int id) {
-            //  Action for 'NO' Button
-            dialog.cancel();
-          }
-        });
-
-    //Creating dialog box
-    alert = builder.create();
-
     //On click
-    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        pos = position;
-        alert.show();
-      }
-    });
+    list.setOnItemClickListener((parent, view, position, id) -> {
+      Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
 
-    //On long click
-    list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-      @Override
-      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        return false;
-      }
+      int refPosition = nodeLocations[position];
+      Node node = nodes[refPosition];
+      int cidrIntent = node.getCidr();
+      String address = node.getIpAddress();
+      String binaryNum = node.getIpBinary();
+
+      intent1.putExtra(CIDR_MESSAGE, cidrIntent);
+      intent1.putExtra(ADDRESS_MESSAGE, address);
+      intent1.putExtra(BINARY_IP_MESSAGE, binaryNum);
+
+      startActivity(intent1);
     });
   }
 
+  //finds parent node and tells parent remove
   private void merge() {
-    Node node;
-
-    if(nodeLocations == null) {
-      node = nodes[pos];
-    } else {
-      int refPosition = nodeLocations[pos];
-      node = nodes[refPosition];
-    }
+    int refPosition = nodeLocations[pos];
+    Node node = nodes[refPosition];
 
     if (node == tree.getRoot()) {
       Toast.makeText(getApplicationContext(),"Cannot merge root",
@@ -131,55 +95,31 @@ public class SplitterActivity extends AppCompatActivity {
           Toast.LENGTH_SHORT).show();
       return;
     } else {
-
       tree.merge(parent);
-
-      if(nodeLocations == null) {
-        refreshListAll();
-      } else {
-        refreshListBottom();
-      }
+      refreshListBottom();
       Toast.makeText(getApplicationContext(),"Merged",
           Toast.LENGTH_SHORT).show();
     }
   }
 
   private void split() {
-    Node node;
-
-    if(nodeLocations == null) {
-      node = nodes[pos];
-    } else {
-      int refPosition = nodeLocations[pos];
-      node = nodes[refPosition];
-    }
+    int refPosition = nodeLocations[pos];
+    Node node = nodes[refPosition];
 
     if (node.getLeft() == null && node.getRight() == null && node.cidr != 32) {
       String splitIp = subNetCalc.ipSplit(node.ipBinary, node.cidr);
       String formatIp = subNetCalc.ipBinaryToFormat(splitIp);
-      node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress);
-      node.setRight(node.cidr+1, splitIp, formatIp);
+      int numOfHosts = subNetCalc.numberOfHosts(node.cidr+1);
+      node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
+      node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
 
-      if(nodeLocations == null) {
-        refreshListAll();
-      } else {
-        refreshListBottom();
-      }
-      Toast.makeText(getApplicationContext(),"Merged",
+      refreshListBottom();
+      Toast.makeText(getApplicationContext(),"Split",
+          Toast.LENGTH_SHORT).show();
+    } else {
+      Toast.makeText(getApplicationContext(),"Cannot Split /32",
           Toast.LENGTH_SHORT).show();
     }
-  }
-
-  private void refreshListAll(){
-    nodes = new Node[tree.size()];
-    nodeIps = new String[nodes.length];
-
-    for(int i = 0; i < nodes.length; i++){
-      nodeIps[i] = nodes[i].getIpAddress() + "   /" + nodes[i].getCidr();
-    }
-
-    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps);
-    list.setAdapter(aa);
   }
 
   private void refreshListBottom(){
@@ -187,6 +127,10 @@ public class SplitterActivity extends AppCompatActivity {
     nodes = new Node[tree.size()];
     nodeIps = new String[tree.sizeBottomLayer()];
     nodeLocations = new int[nodeIps.length];
+    cidrArr = new int[nodeIps.length];
+    numOfHostsArr = new int[nodeIps.length];
+
+
 
     for(int i = 0; i < nodes.length; i++){
       nodes[i] = tree.nthPreordernode(i+1);
@@ -197,13 +141,79 @@ public class SplitterActivity extends AppCompatActivity {
     for(int i = 0; i < nodes.length; i++) {
       Node node = nodes[i];
       if(node.getLeft() == null && node.getRight() == null){
-        nodeIps[counter] = node.getIpAddress() + "    /" +  node.getCidr();
+        nodeIps[counter] = node.getIpAddress();
+        cidrArr[counter] = node.getCidr();
+        numOfHostsArr[counter] = node.getNumberOfHosts();
         nodeLocations[counter] = i;
         counter++;
       }
     }
 
-    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps);
-    list.setAdapter(aa);
+    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps, cidrArr, numOfHostsArr);
+    mAdapter = new SwipeActionAdapter(aa);
+    mAdapter.setListView(list);
+    list.setAdapter(mAdapter);
+
+    setSwipeFunctionality();
+  }
+
+
+
+  private void setSwipeFunctionality(){
+    // Set backgrounds for the swipe directions
+    mAdapter.addBackground(SwipeDirection.DIRECTION_NORMAL_LEFT,R.layout.row_bg_left)
+        .addBackground(SwipeDirection.DIRECTION_NORMAL_RIGHT,R.layout.row_bg_right);
+
+    mAdapter.setSwipeActionListener(new SwipeActionAdapter.SwipeActionListener(){
+      @Override
+      public boolean hasActions(int position, SwipeDirection direction){
+        if(direction.isLeft()) return true;
+        if(direction.isRight()) return true;
+        return false;
+      }
+
+      @Override
+      public boolean shouldDismiss(int position, SwipeDirection direction) {
+        //left actions dismiss
+        switch (direction) {
+          case DIRECTION_FAR_LEFT:
+            return true;
+          case DIRECTION_FAR_RIGHT:
+            return true;
+          case DIRECTION_NORMAL_LEFT:
+            return true;
+          case DIRECTION_NORMAL_RIGHT:
+            return true;
+        }
+        return false;
+      }
+
+      @Override
+      public void onSwipe(int[] positionList, SwipeDirection[] directionList) {
+        for(int i=0;i<positionList.length;i++) {
+          SwipeDirection direction = directionList[i];
+          int position = positionList[i];
+
+          switch (direction) {
+            case DIRECTION_NORMAL_LEFT:
+              pos = position;
+              merge();
+              break;
+            case DIRECTION_FAR_LEFT:
+              pos = position;
+              merge();
+              break;
+            case DIRECTION_NORMAL_RIGHT:
+              pos = position;
+              split();
+              break;
+            case DIRECTION_FAR_RIGHT:
+              pos = position;
+              split();
+              break;
+          }
+        }
+      }
+    });
   }
 }

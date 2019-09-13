@@ -30,28 +30,28 @@
         android:onClick="subnetTransition"
         android:text="@string/update"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
 
     <Spinner
         android:id="@+id/subnet_spinner"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:minWidth="120dp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/ipEntryTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_ip"
+        android:autofillHints="@string/enter_ip"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,8 +63,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/slash"
+        android:textAlignment="textEnd"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/ipEntryTv"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

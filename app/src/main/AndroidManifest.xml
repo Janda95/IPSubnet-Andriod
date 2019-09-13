@@ -11,12 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.DescriptionActivity"
-            android:label="@string/title_activity_description"
-            android:parentActivityName=".activities.SplitterActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.subnetapp.activities.SplitterActivity" />
+            android:label="@string/title_activity_description">
         </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -26,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CheatsheetActivity" />
-        <activity android:name=".activities.SplitterActivity" />
+        <activity android:name=".activities.SplitterActivity"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

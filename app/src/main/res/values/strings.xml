@@ -1,16 +1,20 @@
 <resources>
-    <string name="app_name">SubnetApp</string>
+    <string name="app_name">Subnet Calculator</string>
     <string name="slash">/</string>
-    <string name="to_cheatsheet">SubnetApp</string>
+    <string name="to_cheatsheet">Cheatsheet</string>
     <string name="update">Update</string>
     <string name="enter_ip">IP</string>
     <string name="splitter_netmask">Current NetMask</string>
     <string name="splitter_ip">Original Ip:</string>
     <string name="splitter_upper"></string>
-    <string name="dialog_continue"></string>
-    <string name="dialog_cancel"></string>
-    <string name="dialog_title">Dialog</string>
     <string name="title_activity_description">DescriptionActivity</string>
     <string name="editor_information_placeholder">Editor Information Placeholder</string>
     <string name="dialog_message">Split Builder</string>
+    <string name="hosts_tv_ip_item">number of hosts</string>
+    <string name="ip_address_title">Ip Address:</string>
+    <string name="number_of_hosts_title">Number Of Hosts:</string>
+    <string name="netmask_title">Netmask:</string>
+    <string name="broadcast_title">Broadcast:</string>
+    <string name="address_range_title">Address Range:</string>
+    <string name="usable_address_range_title">Usable Address Range:</string>
 </resources>
