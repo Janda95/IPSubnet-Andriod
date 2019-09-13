@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customIpListItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:padding="4dp">
+    android:padding="4dp"
+    android:background="#ffffff">
 
     <ImageView
         android:id="@+id/imageListIcon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:contentDescription="IpItem"
+        android:contentDescription="IpImage"
         android:src="@drawable/baseline_format_list_bulleted_black_18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_wrapHeight="95"
-        tools:layout_conversion_wrapWidth="95" />
+        />
 
     <TextView
         android:id="@+id/tvIpItem"
@@ -33,9 +32,7 @@
         app:layout_constraintEnd_toStartOf="@+id/cidrIpItem"
         app:layout_constraintLeft_toRightOf="@+id/imageListIcon"
         app:layout_constraintStart_toEndOf="@+id/imageListIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_wrapHeight="63"
-        tools:layout_conversion_wrapWidth="0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cidrIpItem"
@@ -46,8 +43,6 @@
         android:singleLine="true"
         android:textSize="18sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_wrapHeight="63"
-        tools:layout_conversion_wrapWidth="210" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
