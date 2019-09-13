@@ -14,12 +14,14 @@ public class IpArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
   private final String[] values;
   private final int[] cidrArr;
+  private final int[] hosts;
 
-  public IpArrayAdapter(Context context, String[] values, int[] cidr) {
+  public IpArrayAdapter(Context context, String[] values, int[] cidr, int[] hosts) {
     super(context, -1, values);
     this.context = context;
     this.values = values;
     this.cidrArr = cidr;
+    this.hosts = hosts;
   }
 
   @Override
@@ -30,11 +32,14 @@ public class IpArrayAdapter extends ArrayAdapter<String> {
     TextView textView = (TextView) rowView.findViewById(R.id.tvIpItem);
     //ImageView imageView = (ImageView) rowView.findViewById(R.id.imageListIcon);
     TextView textView2 = (TextView) rowView.findViewById(R.id.cidrIpItem);
+    TextView textView3 = rowView.findViewById(R.id.hostsTv);
 
     String cidrStr = Integer.toString(cidrArr[position]);
+    String hostsStr = "Usable Hosts: " + hosts[position];
 
     textView.setText(values[position]);
     textView2.setText("/" + cidrStr);
+    textView3.setText(hostsStr);
 
     return rowView;
   }

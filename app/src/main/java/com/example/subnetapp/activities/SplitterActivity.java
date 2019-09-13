@@ -28,6 +28,7 @@ public class SplitterActivity extends AppCompatActivity {
   private String[] nodeIps;
   private int[] nodeLocations = null;
   private int[] cidrArr;
+  private int[] numOfHostsArr;
   private int pos = -1;
 
   private ListView list;
@@ -48,9 +49,10 @@ public class SplitterActivity extends AppCompatActivity {
     String ipBinary = subNetCalc.ipFormatToBinary(ipFormatted);
     String cutBinary = subNetCalc.trimCidrIp(ipBinary, cidr);
     ipFormatted = subNetCalc.ipBinaryToFormat(cutBinary);
+    int numOfHosts = subNetCalc.numberOfHosts(cidr);
 
     tree = new BinaryTree();
-    tree.setRoot(cidr, cutBinary, ipFormatted);
+    tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts);
 
     //tree list implementation
     list = findViewById(R.id.android_list);
@@ -93,7 +95,6 @@ public class SplitterActivity extends AppCompatActivity {
           Toast.LENGTH_SHORT).show();
       return;
     } else {
-
       tree.merge(parent);
       refreshListBottom();
       Toast.makeText(getApplicationContext(),"Merged",
@@ -108,11 +109,15 @@ public class SplitterActivity extends AppCompatActivity {
     if (node.getLeft() == null && node.getRight() == null && node.cidr != 32) {
       String splitIp = subNetCalc.ipSplit(node.ipBinary, node.cidr);
       String formatIp = subNetCalc.ipBinaryToFormat(splitIp);
-      node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress);
-      node.setRight(node.cidr+1, splitIp, formatIp);
+      int numOfHosts = subNetCalc.numberOfHosts(node.cidr+1);
+      node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
+      node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
 
       refreshListBottom();
       Toast.makeText(getApplicationContext(),"Split",
+          Toast.LENGTH_SHORT).show();
+    } else {
+      Toast.makeText(getApplicationContext(),"Cannot Split /32",
           Toast.LENGTH_SHORT).show();
     }
   }
@@ -123,6 +128,7 @@ public class SplitterActivity extends AppCompatActivity {
     nodeIps = new String[tree.sizeBottomLayer()];
     nodeLocations = new int[nodeIps.length];
     cidrArr = new int[nodeIps.length];
+    numOfHostsArr = new int[nodeIps.length];
 
 
 
@@ -137,16 +143,16 @@ public class SplitterActivity extends AppCompatActivity {
       if(node.getLeft() == null && node.getRight() == null){
         nodeIps[counter] = node.getIpAddress();
         cidrArr[counter] = node.getCidr();
+        numOfHostsArr[counter] = node.getNumberOfHosts();
         nodeLocations[counter] = i;
         counter++;
       }
     }
 
-    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps, cidrArr);
+    ArrayAdapter aa = new IpArrayAdapter(this, nodeIps, cidrArr, numOfHostsArr);
     mAdapter = new SwipeActionAdapter(aa);
     mAdapter.setListView(list);
     list.setAdapter(mAdapter);
-    //mAdapter.notifyDataSetChanged();
 
     setSwipeFunctionality();
   }

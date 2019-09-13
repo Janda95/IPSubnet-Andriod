@@ -13,8 +13,8 @@ public class BinaryTree {
     return root;
   }
 
-  public void setRoot(int cidr, String ipBinary, String ipAddress) {
-    root = new Node(cidr, ipBinary, ipAddress);
+  public void setRoot(int cidr, String ipBinary, String ipAddress, int numberOfHosts) {
+    root = new Node(cidr, ipBinary, ipAddress, numberOfHosts);
   }
 
   //Find Nth node starting with root
