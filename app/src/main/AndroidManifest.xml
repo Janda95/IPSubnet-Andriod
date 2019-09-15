@@ -20,9 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CheatsheetActivity" />
+        <activity android:name=".activities.CheatsheetActivity"
+            android:label="Hosts Lookup"/>
         <activity android:name=".activities.SplitterActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:label="Subnet Splitter"/>
     </application>
 
 </manifest>
