@@ -78,11 +78,11 @@ public class SplitterActivity extends AppCompatActivity {
   }
 
   //finds parent node and tells parent remove
-  private void merge() {
+  private void merge(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
 
-    if (node == tree.getRoot()) {
+    if ( node == tree.getRoot() ){
       Toast.makeText(getApplicationContext(),"Cannot merge root",
           Toast.LENGTH_SHORT).show();
       return;
@@ -90,7 +90,7 @@ public class SplitterActivity extends AppCompatActivity {
 
     Node parent = tree.findParent(node);
 
-    if (parent == null) {
+    if (parent == null){
       Toast.makeText(getApplicationContext(),"Unable to merge",
           Toast.LENGTH_SHORT).show();
       return;
@@ -102,7 +102,7 @@ public class SplitterActivity extends AppCompatActivity {
     }
   }
 
-  private void split() {
+  private void split(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
 
@@ -130,8 +130,6 @@ public class SplitterActivity extends AppCompatActivity {
     cidrArr = new int[nodeIps.length];
     numOfHostsArr = new int[nodeIps.length];
 
-
-
     for(int i = 0; i < nodes.length; i++){
       nodes[i] = tree.nthPreordernode(i+1);
     }
@@ -157,8 +155,6 @@ public class SplitterActivity extends AppCompatActivity {
     setSwipeFunctionality();
   }
 
-
-
   private void setSwipeFunctionality(){
     // Set backgrounds for the swipe directions
     mAdapter.addBackground(SwipeDirection.DIRECTION_NORMAL_LEFT,R.layout.row_bg_left)
@@ -174,16 +170,14 @@ public class SplitterActivity extends AppCompatActivity {
 
       @Override
       public boolean shouldDismiss(int position, SwipeDirection direction) {
-        //left actions dismiss
         switch (direction) {
+          case DIRECTION_NORMAL_LEFT:
           case DIRECTION_FAR_LEFT:
-            return true;
+          case DIRECTION_NORMAL_RIGHT:
           case DIRECTION_FAR_RIGHT:
             return true;
-          case DIRECTION_NORMAL_LEFT:
-            return true;
-          case DIRECTION_NORMAL_RIGHT:
-            return true;
+          case DIRECTION_NEUTRAL:
+            break;
         }
         return false;
       }
@@ -196,17 +190,11 @@ public class SplitterActivity extends AppCompatActivity {
 
           switch (direction) {
             case DIRECTION_NORMAL_LEFT:
-              pos = position;
-              merge();
-              break;
             case DIRECTION_FAR_LEFT:
               pos = position;
               merge();
               break;
             case DIRECTION_NORMAL_RIGHT:
-              pos = position;
-              split();
-              break;
             case DIRECTION_FAR_RIGHT:
               pos = position;
               split();
