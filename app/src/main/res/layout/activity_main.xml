@@ -7,7 +7,7 @@
     tools:context=".activities.MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/cheatsheetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,16 +19,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/submitButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:onClick="subnetTransition"
         android:text="@string/update"
+        app:layout_constraintEnd_toStartOf="@+id/clearIpInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
 
@@ -40,7 +42,7 @@
         android:layout_marginTop="16dp"
         android:spinnerMode="dropdown"
         android:minWidth="120dp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/slashTv"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
@@ -51,13 +53,13 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_ip"
-        android:autofillHints="@string/enter_ip"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:digits="0123456789."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/slashTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -67,5 +69,18 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/ipEntryTv"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/clearIpInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="clearInput"
+        android:text="@string/clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/submitButton"
+        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
 
 </android.support.constraint.ConstraintLayout>

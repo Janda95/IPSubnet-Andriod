@@ -15,8 +15,10 @@ import com.example.subnetapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
+  EditText inputTextView;
   Spinner spinner;
   AlertDialog.Builder builder;
+  private int defaultNetmask;
 
   protected static final String IP_STRING_MESSAGE = "com.example.IPSTRING.Message";
   protected static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
@@ -29,12 +31,17 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initVariables() {
+    //Init TextView
+    inputTextView = findViewById(R.id.ipEntryTv);
+
     //Init Spinner
     spinner = findViewById(R.id.subnet_spinner);
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
         R.array.split_locations, android.R.layout.simple_spinner_item);
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spinner.setAdapter(adapter);
+    defaultNetmask = 16; // default is "/24"
+    spinner.setSelection(defaultNetmask);
 
     //Dialog Builder
     builder = new AlertDialog.Builder(this);
@@ -49,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
   //Transition to Splitter View
   public void subnetTransition(View view) {
     //Get Text From View
-    EditText editText = findViewById(R.id.ipEntryTv);
-    String message = editText.getText().toString();
+    String message = inputTextView.getText().toString();
     String[] ipArray = message.split("\\.");
 
     //InputValidation
@@ -69,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
     intent.putExtra(IP_STRING_MESSAGE, message);
     intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
     startActivity(intent);
+  }
+
+  public void clearInput(View view){
+    inputTextView.setText("");
+    spinner.setSelection(defaultNetmask);
   }
 
   private boolean isValid(String[] array) {
