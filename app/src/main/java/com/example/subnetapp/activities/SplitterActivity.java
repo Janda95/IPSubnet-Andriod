@@ -11,7 +11,7 @@ import com.example.subnetapp.R;
 import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.models.BinaryTree;
 import com.example.subnetapp.models.Node;
-import com.example.subnetapp.models.SubNetCalculator;
+import com.example.subnetapp.models.SubnetCalculator;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 
@@ -21,7 +21,7 @@ public class SplitterActivity extends AppCompatActivity {
   protected static final String ADDRESS_MESSAGE = "com.example.ADDRESS.MESSAGE";
   protected static final String CIDR_MESSAGE = "com.example.CIDR.MESSAGE";
 
-  SubNetCalculator subNetCalc;
+  SubnetCalculator subnetCalc;
   BinaryTree tree;
 
   private Node[] nodes;
@@ -39,17 +39,17 @@ public class SplitterActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splitter);
 
-    subNetCalc = new SubNetCalculator();
+    subnetCalc = new SubnetCalculator();
 
     Intent intent = getIntent();
     String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
     String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
 
     int cidr = Integer.parseInt(cidrString);
-    String ipBinary = subNetCalc.ipFormatToBinary(ipFormatted);
-    String cutBinary = subNetCalc.trimCidrIp(ipBinary, cidr);
-    ipFormatted = subNetCalc.ipBinaryToFormat(cutBinary);
-    int numOfHosts = subNetCalc.numberOfHosts(cidr);
+    String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
+    String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
+    ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
+    int numOfHosts = subnetCalc.numberOfHosts(cidr);
 
     tree = new BinaryTree();
     tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts);
@@ -78,11 +78,11 @@ public class SplitterActivity extends AppCompatActivity {
   }
 
   //finds parent node and tells parent remove
-  private void merge() {
+  private void merge(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
 
-    if (node == tree.getRoot()) {
+    if ( node == tree.getRoot() ){
       Toast.makeText(getApplicationContext(),"Cannot merge root",
           Toast.LENGTH_SHORT).show();
       return;
@@ -90,7 +90,7 @@ public class SplitterActivity extends AppCompatActivity {
 
     Node parent = tree.findParent(node);
 
-    if (parent == null) {
+    if (parent == null){
       Toast.makeText(getApplicationContext(),"Unable to merge",
           Toast.LENGTH_SHORT).show();
       return;
@@ -102,14 +102,14 @@ public class SplitterActivity extends AppCompatActivity {
     }
   }
 
-  private void split() {
+  private void split(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
 
     if (node.getLeft() == null && node.getRight() == null && node.cidr != 32) {
-      String splitIp = subNetCalc.ipSplit(node.ipBinary, node.cidr);
-      String formatIp = subNetCalc.ipBinaryToFormat(splitIp);
-      int numOfHosts = subNetCalc.numberOfHosts(node.cidr+1);
+      String splitIp = subnetCalc.ipSplit(node.ipBinary, node.cidr);
+      String formatIp = subnetCalc.ipBinaryToFormat(splitIp);
+      int numOfHosts = subnetCalc.numberOfHosts(node.cidr+1);
       node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
       node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
 
@@ -129,8 +129,6 @@ public class SplitterActivity extends AppCompatActivity {
     nodeLocations = new int[nodeIps.length];
     cidrArr = new int[nodeIps.length];
     numOfHostsArr = new int[nodeIps.length];
-
-
 
     for(int i = 0; i < nodes.length; i++){
       nodes[i] = tree.nthPreordernode(i+1);
@@ -157,8 +155,6 @@ public class SplitterActivity extends AppCompatActivity {
     setSwipeFunctionality();
   }
 
-
-
   private void setSwipeFunctionality(){
     // Set backgrounds for the swipe directions
     mAdapter.addBackground(SwipeDirection.DIRECTION_NORMAL_LEFT,R.layout.row_bg_left)
@@ -174,16 +170,14 @@ public class SplitterActivity extends AppCompatActivity {
 
       @Override
       public boolean shouldDismiss(int position, SwipeDirection direction) {
-        //left actions dismiss
         switch (direction) {
+          case DIRECTION_NORMAL_LEFT:
           case DIRECTION_FAR_LEFT:
-            return true;
+          case DIRECTION_NORMAL_RIGHT:
           case DIRECTION_FAR_RIGHT:
             return true;
-          case DIRECTION_NORMAL_LEFT:
-            return true;
-          case DIRECTION_NORMAL_RIGHT:
-            return true;
+          case DIRECTION_NEUTRAL:
+            break;
         }
         return false;
       }
@@ -196,17 +190,11 @@ public class SplitterActivity extends AppCompatActivity {
 
           switch (direction) {
             case DIRECTION_NORMAL_LEFT:
-              pos = position;
-              merge();
-              break;
             case DIRECTION_FAR_LEFT:
               pos = position;
               merge();
               break;
             case DIRECTION_NORMAL_RIGHT:
-              pos = position;
-              split();
-              break;
             case DIRECTION_FAR_RIGHT:
               pos = position;
               split();

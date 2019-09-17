@@ -2,12 +2,12 @@
     <string name="app_name">Subnet Calculator</string>
     <string name="slash">/</string>
     <string name="to_cheatsheet">Cheatsheet</string>
-    <string name="update">Update</string>
+    <string name="update">Calculate</string>
     <string name="enter_ip">IP</string>
     <string name="splitter_netmask">Current NetMask</string>
     <string name="splitter_ip">Original Ip:</string>
     <string name="splitter_upper"></string>
-    <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_description">Description</string>
     <string name="editor_information_placeholder">Editor Information Placeholder</string>
     <string name="dialog_message">Split Builder</string>
     <string name="hosts_tv_ip_item">number of hosts</string>
@@ -17,4 +17,7 @@
     <string name="broadcast_title">Broadcast:</string>
     <string name="address_range_title">Address Range:</string>
     <string name="usable_address_range_title">Usable Address Range:</string>
+    <string name="clear">Clear</string>
+    <string name="list_view_instructions">Swipe Right: Split / Swipe Left: Merge / Tap: More Info</string>
+    <string name="ip_image_content_description">IpImage</string>
 </resources>
