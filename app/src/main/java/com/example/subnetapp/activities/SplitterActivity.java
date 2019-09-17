@@ -11,7 +11,7 @@ import com.example.subnetapp.R;
 import com.example.subnetapp.adapters.IpArrayAdapter;
 import com.example.subnetapp.models.BinaryTree;
 import com.example.subnetapp.models.Node;
-import com.example.subnetapp.models.SubNetCalculator;
+import com.example.subnetapp.models.SubnetCalculator;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 
@@ -21,7 +21,7 @@ public class SplitterActivity extends AppCompatActivity {
   protected static final String ADDRESS_MESSAGE = "com.example.ADDRESS.MESSAGE";
   protected static final String CIDR_MESSAGE = "com.example.CIDR.MESSAGE";
 
-  SubNetCalculator subNetCalc;
+  SubnetCalculator subnetCalc;
   BinaryTree tree;
 
   private Node[] nodes;
@@ -39,17 +39,17 @@ public class SplitterActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splitter);
 
-    subNetCalc = new SubNetCalculator();
+    subnetCalc = new SubnetCalculator();
 
     Intent intent = getIntent();
     String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
     String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
 
     int cidr = Integer.parseInt(cidrString);
-    String ipBinary = subNetCalc.ipFormatToBinary(ipFormatted);
-    String cutBinary = subNetCalc.trimCidrIp(ipBinary, cidr);
-    ipFormatted = subNetCalc.ipBinaryToFormat(cutBinary);
-    int numOfHosts = subNetCalc.numberOfHosts(cidr);
+    String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
+    String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
+    ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
+    int numOfHosts = subnetCalc.numberOfHosts(cidr);
 
     tree = new BinaryTree();
     tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts);
@@ -107,9 +107,9 @@ public class SplitterActivity extends AppCompatActivity {
     Node node = nodes[refPosition];
 
     if (node.getLeft() == null && node.getRight() == null && node.cidr != 32) {
-      String splitIp = subNetCalc.ipSplit(node.ipBinary, node.cidr);
-      String formatIp = subNetCalc.ipBinaryToFormat(splitIp);
-      int numOfHosts = subNetCalc.numberOfHosts(node.cidr+1);
+      String splitIp = subnetCalc.ipSplit(node.ipBinary, node.cidr);
+      String formatIp = subnetCalc.ipBinaryToFormat(splitIp);
+      int numOfHosts = subnetCalc.numberOfHosts(node.cidr+1);
       node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
       node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
 

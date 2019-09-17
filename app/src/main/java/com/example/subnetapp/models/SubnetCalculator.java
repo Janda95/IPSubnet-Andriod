@@ -1,10 +1,10 @@
 package com.example.subnetapp.models;
 
-public class SubNetCalculator {
+public class SubnetCalculator {
 
 
   //For using functions in SplitterActivity
-  public SubNetCalculator(){}
+  public SubnetCalculator(){}
 
   public String trimCidrIp(String binaryIp, int cidr){
 
