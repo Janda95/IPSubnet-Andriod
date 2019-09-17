@@ -4,42 +4,17 @@ public class SubNetCalculator {
 
 
   //For using functions in SplitterActivity
-  public SubNetCalculator(){
-  }
+  public SubNetCalculator(){}
 
-  public int ipToCidrIp(int aCidr, int ip){
-    int ipInt = ip;
-    int cidr = aCidr;
+  public String trimCidrIp(String binaryIp, int cidr){
 
     //make into binary formatted string
-    String binaryNum = String.format("%32s", Integer.toBinaryString(ipInt)).replace(' ', '0');
-
-    System.out.println(binaryNum);
+    String binaryNum = binaryIp;
 
     StringBuilder builderBinaryNum = new StringBuilder(binaryNum);
 
     //change binary string substring to 0 after cidr
-    for(int i = cidr; i < binaryNum.length(); i++) {
-      builderBinaryNum.setCharAt(i, '0');
-    }
-
-    binaryNum = builderBinaryNum.toString();
-
-    //change back into int
-    System.out.println(binaryNum);
-
-    return 0;
-  }
-
-  public String trimCidrIp(String ip, int cidr){
-
-    //make into binary formatted string
-    String binaryNum = ip;
-
-    StringBuilder builderBinaryNum = new StringBuilder(binaryNum);
-
-    //change binary string substring to 0 after cidr
-    for(int i = cidr; i < binaryNum.length(); i++) {
+    for(int i = cidr; i < binaryNum.length(); i++){
       builderBinaryNum.setCharAt(i, '0');
     }
 
@@ -48,8 +23,8 @@ public class SubNetCalculator {
     return binaryNum;
   }
 
-  public String ipFormatToBinary(String ip) {
-    String[] stringArray = ip.split("\\.");
+  public String ipFormatToBinary(String binaryIp){
+    String[] stringArray = binaryIp.split("\\.");
     Integer[] intArray = new Integer[4];
     for (int i = 0; i < 4; i++) {
       try {
@@ -63,12 +38,11 @@ public class SubNetCalculator {
     return binaryNum;
   }
 
-  public String ipBinaryToFormat(String ipBinary){
-
+  public String ipBinaryToFormat(String binaryIp){
     String[] arr = new String[4];
 
     for(int i = 0; i < arr.length; i++) {
-      String temp = ipBinary.substring(i*8, (i*8)+8);
+      String temp = binaryIp.substring(i*8, (i*8)+8);
       int number = Integer.parseInt(temp, 2);
       String ipInt = Integer.toString(number);
       arr[i] = ipInt;
@@ -79,16 +53,15 @@ public class SubNetCalculator {
     return ipFormat;
   }
 
-  public String ipSplit(String ipBinary, int cidr) {
-    //assuming check that cidr is not 32
-    char[] splitOne = ipBinary.toCharArray();
+  public String ipSplit(String binaryIp, int cidr){
+    //Assuming cidr is not 32
+    char[] splitOne = binaryIp.toCharArray();
     splitOne[cidr] = '1';
     String value = new String(splitOne);
     return value;
   }
 
-  public String subnetMask(int cidr) {
-
+  public String subnetMask(int cidr){
     char[] arr = new char[32];
     for(int i = 0; i < arr.length; i++){
       if (i < cidr) {
@@ -101,6 +74,23 @@ public class SubNetCalculator {
     theString = ipBinaryToFormat(theString);
 
     return theString;
+  }
+
+  public String broadcastAddress(String binaryIp, int cidr){
+    if(cidr == 32){
+      ipBinaryToFormat(binaryIp);
+      return ipBinaryToFormat(binaryIp);
+    }
+
+    int num = 32 - cidr;
+    int allHosts = (int) Math.pow(2, num) -1;
+
+
+    long startInt = Long.parseLong(binaryIp,2);
+    long endInt = startInt + allHosts;
+    String endBin = String.format("%32s", Integer.toBinaryString((int) endInt)).replace(' ', '0');
+    String end = ipBinaryToFormat(endBin);
+    return end;
   }
 
   public int numberOfHosts(int cidr) {
@@ -116,8 +106,8 @@ public class SubNetCalculator {
     }
   }
 
-  public String rangeOfAddresses(String ipBinary, int cidr) {
-    String start = ipBinaryToFormat(ipBinary);
+  public String rangeOfAddresses(String binaryIp, int cidr) {
+    String start = ipBinaryToFormat(binaryIp);
     if(cidr == 32){
       return start;
     }
@@ -125,7 +115,7 @@ public class SubNetCalculator {
     int num = 32 - cidr;
     int allHosts = (int) Math.pow(2, num) - 1;
 
-    long startInt = Long.parseLong(ipBinary,2);
+    long startInt = Long.parseLong(binaryIp,2);
     long endInt = startInt + allHosts;
     String endBin = String.format("%32s", Integer.toBinaryString((int) endInt)).replace(' ', '0');
     String end = ipBinaryToFormat(endBin);
@@ -133,16 +123,16 @@ public class SubNetCalculator {
     return start + " - " + end;
   }
 
-  public String usableIpAddresses(String ipBinary, int cidr) {
+  public String usableIpAddresses(String binaryIp, int cidr) {
     if(cidr == 32){
-      ipBinaryToFormat(ipBinary);
-      return ipBinaryToFormat(ipBinary);
+      ipBinaryToFormat(binaryIp);
+      return ipBinaryToFormat(binaryIp);
     }
 
     int num = 32 - cidr;
     int allHosts = (int) Math.pow(2, num) -1;
 
-    long startInt = Long.parseLong(ipBinary,2);
+    long startInt = Long.parseLong(binaryIp,2);
     long endInt = startInt + allHosts;
 
     if(cidr < 31) {
@@ -157,22 +147,4 @@ public class SubNetCalculator {
 
     return start + " - " + end;
   }
-
-  public String broadcastAddress(String ipBinary, int cidr){
-    if(cidr == 32){
-      ipBinaryToFormat(ipBinary);
-      return ipBinaryToFormat(ipBinary);
-    }
-
-    int num = 32 - cidr;
-    int allHosts = (int) Math.pow(2, num) -1;
-
-
-    long startInt = Long.parseLong(ipBinary,2);
-    long endInt = startInt + allHosts;
-    String endBin = String.format("%32s", Integer.toBinaryString((int) endInt)).replace(' ', '0');
-    String end = ipBinaryToFormat(endBin);
-    return end;
-  }
-
 }
