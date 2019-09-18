@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Subnet Calculator</string>
+    <string name="app_name">IPv4 Subnet Calculator</string>
     <string name="slash">/</string>
     <string name="to_cheatsheet">Cheatsheet</string>
     <string name="update">Calculate</string>
