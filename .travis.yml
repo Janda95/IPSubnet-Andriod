@@ -1,6 +1,9 @@
 language: java
 os: linux
 dist: bionic
+env:
+  global:
+  - ANDROID_SDK_ROOT=/home/jarek/Android/Sdk
 android:
   components:
     # Uncomment the lines below if you want to
