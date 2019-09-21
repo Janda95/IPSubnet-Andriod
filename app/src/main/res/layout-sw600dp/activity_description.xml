@@ -32,7 +32,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/number_of_hosts_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/netmask_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -86,7 +86,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/broadcast_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -97,7 +97,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -107,7 +107,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/address_range_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -118,7 +118,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -128,7 +128,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/usable_address_range_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -139,7 +139,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
         </LinearLayout>
     </ScrollView>
