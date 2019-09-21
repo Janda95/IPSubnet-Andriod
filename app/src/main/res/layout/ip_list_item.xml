@@ -12,6 +12,7 @@
         android:id="@+id/imageListIcon"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/ip_image_content_description"
