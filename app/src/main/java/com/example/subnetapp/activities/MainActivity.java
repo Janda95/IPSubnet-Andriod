@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     //Init Spinner
     spinner = findViewById(R.id.subnet_spinner);
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-        R.array.split_locations, android.R.layout.simple_spinner_item);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        R.array.split_locations, R.layout.spinner_item);
+    adapter.setDropDownViewResource(R.layout.spinner_item);
     spinner.setAdapter(adapter);
     defaultNetmask = 16; // default is "/24"
     spinner.setSelection(defaultNetmask);
