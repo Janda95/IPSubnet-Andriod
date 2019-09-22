@@ -20,4 +20,10 @@
     <string name="clear">Clear</string>
     <string name="list_view_instructions">Swipe Right: Split / Swipe Left: Merge / Tap: More Info</string>
     <string name="ip_image_content_description">IpImage</string>
+    <string name="hosts_cheatsheet_item_tv">number of hosts</string>
+    <string name="netmask_cheatsheet_item_tv">netmask</string>
+    <string name="bits_cheatsheet_item_tv">bits</string>
+    <string name="bits_table_title">Bits</string>
+    <string name="usable_hosts_table_title">Usable Hosts</string>
+    <string name="netmask_table_title">Netmask</string>
 </resources>

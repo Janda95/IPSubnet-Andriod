@@ -6,35 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <Button
-        android:id="@+id/cheatsheetButton"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="viewCheat"
-        android:text="@string/to_cheatsheet"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
-
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="subnetTransition"
-        android:text="@string/update"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/clearIpInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
-
     <Spinner
         android:id="@+id/subnet_spinner"
         android:layout_width="120dp"
@@ -59,7 +30,7 @@
         android:ems="10"
         android:hint="@string/enter_ip"
         android:inputType="number"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/slashTv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,6 +50,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/submitButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="subnetTransition"
+        android:text="@string/update"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/clearIpInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
+
+    <Button
         android:id="@+id/clearIpInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -91,5 +76,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/submitButton"
         app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
+
+    <Button
+        android:id="@+id/cheatsheetButton"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="viewCheat"
+        android:text="@string/to_cheatsheet"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
 
 </android.support.constraint.ConstraintLayout>
