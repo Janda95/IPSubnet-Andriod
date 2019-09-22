@@ -15,6 +15,9 @@ Current Version is not on app store and is currently a work in progress for pers
 - Google Pixel 2 (Simulator)
 - S6 Edge+ (Physical)
 
+Travis CI Build Status:
+[![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=master)](https://travis-ci.org/Janda95/IPSubnet-Android)
+
 # How to download the application
 - UNDER CONSTRUCTION
 
