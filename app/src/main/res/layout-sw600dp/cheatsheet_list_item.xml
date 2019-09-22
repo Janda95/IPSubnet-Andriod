@@ -8,16 +8,19 @@
     android:padding="4dp"
     android:background="#ffffff">
 
-    <ImageView
-        android:id="@+id/imageListIcon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="8dp"
+    <TextView
+        android:id="@+id/bitsItemTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="@string/ip_image_content_description"
-        android:src="@drawable/baseline_format_list_bulleted_black_18"
+        android:text="@string/bits_cheatsheet_item_tv"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/netmaskItemTv"
+        app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,43 +28,34 @@
         android:id="@+id/netmaskItemTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:singleLine="true"
+        android:text="@string/netmask_cheatsheet_item_tv"
         android:textAlignment="viewStart"
         android:textColor="@color/colorDefaultText"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/hostsItemTv"
-        app:layout_constraintLeft_toRightOf="@+id/imageListIcon"
-        app:layout_constraintStart_toEndOf="@+id/imageListIcon"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintStart_toEndOf="@+id/bitsItemTv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/hostsItemTv"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:singleLine="true"
+        android:text="@string/hosts_cheatsheet_item_tv"
+        android:textAlignment="viewStart"
         android:textColor="@color/colorSecondaryText"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/netmaskItemTv"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/bitsItemTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/hosts_tv_ip_item"
-        android:textColor="@color/colorSecondaryText"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageListIcon"
-        app:layout_constraintTop_toBottomOf="@id/netmaskItemTv" />
 
 </android.support.constraint.ConstraintLayout>

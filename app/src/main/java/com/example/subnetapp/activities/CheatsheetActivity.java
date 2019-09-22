@@ -3,50 +3,46 @@ package com.example.subnetapp.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.subnetapp.R;
+import com.example.subnetapp.adapters.CheatsheetArrayAdapter;
+import com.example.subnetapp.models.SubnetCalculator;
 
 public class CheatsheetActivity extends AppCompatActivity {
+
+  private ListView list;
+  String[] bitsArr;
+  String[] netmaskArr;
+  String[] hostsArr;
+  SubnetCalculator subCalc;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cheatsheet);
-    setupTextView();
+    list = findViewById(R.id.cheatsheet_list);
+    subCalc = new SubnetCalculator();
+
+    setupValues();
+    setupList();
+
   }
 
-  private void setupTextView() {
-    TextView textView = findViewById(R.id.contentTextView);
+  private void setupValues(){
+    bitsArr = new String[25];
+    netmaskArr = new String[25];
+    hostsArr = new String[25];
+    for(int i = 8; i <= 32; i++){
+      bitsArr[i-8] = "/" + i;
+      netmaskArr[i-8] = subCalc.subnetMask(i);
+      hostsArr[i-8] = String.valueOf(subCalc.numberOfHosts(i));
+    }
+  }
 
-    String hostNumberInfo =
-      "/#    Hosts\n" +
-      "/8:   16,777,214\n" +
-      "/9:   8,388,606\n" +
-      "/10:  4,194,302\n" +
-      "/11:  2,097,150\n" +
-      "/12:  1,048,574\n" +
-      "/13:  524,286\n" +
-      "/14:  262,142\n" +
-      "/15:  131,070\n" +
-      "/16:  65,534\n" +
-      "/17:  32,766\n" +
-      "/18:  16,382\n" +
-      "/19:  8,190\n" +
-      "/20:  4,094\n" +
-      "/21:  2,046\n" +
-      "/22:  1,022\n" +
-      "/23:  510\n" +
-      "/24:  254\n" +
-      "/25:  126\n" +
-      "/26:  62\n" +
-      "/27:  30\n" +
-      "/28:  14\n" +
-      "/29:  6\n" +
-      "/30:  2\n" +
-      "/31:  2\n" +
-      "/32:  1" ;
-
-    textView.setText(hostNumberInfo);
+  private void setupList() {
+    ArrayAdapter aa = new CheatsheetArrayAdapter(this, bitsArr, netmaskArr, hostsArr);
+    list.setAdapter(aa);
   }
 }
