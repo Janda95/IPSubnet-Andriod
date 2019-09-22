@@ -10,10 +10,12 @@ Disclaimer:
 Current Version is not on app store and is currently a work in progress for personal use. If you would like to download and modify this code for personal use then feel free! This is a personal project for my father who requested an application for a subnet calculator drawing inspiration from a web application that does something similar.
 
 # My development environment:
-- OS: Ubuntu 18.04.1 LTS
-- AndriodSDK Version: 
-- Minimum Target Version:
+- OS: Ubuntu 18.04.1 LTS (Bionic Beaver)
+- AndriodSDK Version: 3.5
+- Minimum Application API: 21 (5.0 Lollipop)
+- Target Application API: 28 (9.0 Pie)
 - Google Java Style Guide
+- Travis CI Testing Integration
 
 # Devices Tested
 - Google Pixel 2 (Simulator)
