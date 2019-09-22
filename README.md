@@ -1,4 +1,8 @@
-# IPSubnet-Andriod [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=master)](https://travis-ci.org/Janda95/IPSubnet-Android)
+# IPSubnet-Andriod 
+### Master: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=master)](https://travis-ci.org/Janda95/IPSubnet-Android)
+
+### Development: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=dev)](https://travis-ci.org/Janda95/IPSubnet-Android)
+
 Summary:
 Andriod application for viewing, calculating, and displaying split IP addresses on a mobile android device.
 
@@ -14,19 +18,34 @@ Current Version is not on app store and is currently a work in progress for pers
 # Devices Tested
 - Google Pixel 2 (Simulator)
 - S6 Edge+ (Physical)
+- 10.1 WXGA (Simulator)
+- 7 WSVGA (Simulator)
+- 5.1 WVGA (Simulator)
 
 # How to download the application
-- UNDER CONSTRUCTION
+- Link to Google Playstore
+- Clone from Github
+- Open with Android Studio
+- Sync Gradle (if option is requested)
+- Run application and select available device
 
 # How to run the application using simulator
-- UNDER CONSTRUCTION
+- Select Available Device image with device api above 21
+
+### Otherwise:
+- Open AVD Manager
+- Create Virtual Device
+- Run Application with Virtual Device
 
 # How to run the application using your device
-- UNDER CONSTRUCTION
 
-- Store
+### Store:
+- PENDING
 
-- Developer Mode
+### Personal Device:
+- Put Android device into developer mode
+- Plug into computer with appropriate cable while running Android Studio
+- Run application with device to download non-production application onto device
 
 # Contributers
 - Jarek Rettinghouse (Janda95) Developer / Project Owner
