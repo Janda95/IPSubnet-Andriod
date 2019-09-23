@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.subnetapp.R;
 
-
 public class MainActivity extends AppCompatActivity {
 
   EditText inputTextView;
@@ -27,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    initVariables();
+    init();
   }
 
-  private void initVariables() {
+  private void init() {
     //Init TextView
     inputTextView = findViewById(R.id.ipEntryTv);
 
@@ -71,17 +70,18 @@ public class MainActivity extends AppCompatActivity {
 
     //Intent
     Intent intent = new Intent( this, SplitterActivity.class);
-
     intent.putExtra(IP_STRING_MESSAGE, message);
     intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
     startActivity(intent);
   }
 
+  //Reset input
   public void clearInput(View view){
     inputTextView.setText("");
     spinner.setSelection(defaultNetmask);
   }
 
+  //Validate Input
   private boolean isValid(String[] array) {
     //Number of Tokens
     if (array.length != 4) {

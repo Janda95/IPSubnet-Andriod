@@ -25,15 +25,16 @@ public class CheatsheetActivity extends AppCompatActivity {
     list = findViewById(R.id.cheatsheet_list);
     subCalc = new SubnetCalculator();
 
-    setupValues();
+    setupTableValues();
     setupList();
-
   }
 
-  private void setupValues(){
+  private void setupTableValues(){
     bitsArr = new String[25];
     netmaskArr = new String[25];
     hostsArr = new String[25];
+
+    //Generate CIDR 8-32 Values
     for(int i = 8; i <= 32; i++){
       bitsArr[i-8] = "/" + i;
       netmaskArr[i-8] = subCalc.subnetMask(i);

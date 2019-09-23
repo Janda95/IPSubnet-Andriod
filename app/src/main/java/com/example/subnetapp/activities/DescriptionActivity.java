@@ -20,12 +20,12 @@ public class DescriptionActivity extends AppCompatActivity {
     subnetCalc = new SubnetCalculator();
 
     Intent intent = getIntent();
-    TextView textView3 = findViewById( R.id.broadcastTv);
-    TextView textView4 = findViewById( R.id.netmaskTv );
-    TextView textView5 = findViewById( R.id.ipTv );
-    TextView textView6 = findViewById( R.id.hostsTv );
-    TextView textView7 = findViewById( R.id.addressRangeTv);
-    TextView textView8 = findViewById( R.id.usableRangeTv);
+    TextView broadcastTv = findViewById( R.id.broadcastTv);
+    TextView netmaskTv = findViewById( R.id.netmaskTv );
+    TextView ipTv = findViewById( R.id.ipTv );
+    TextView hostsTv = findViewById( R.id.hostsTv );
+    TextView addressRangeTv = findViewById( R.id.addressRangeTv);
+    TextView usableRangeTv = findViewById( R.id.usableRangeTv);
 
     int cidr = intent.getIntExtra( SplitterActivity.CIDR_MESSAGE, -1 );
     String address = intent.getStringExtra( SplitterActivity.ADDRESS_MESSAGE );
@@ -40,11 +40,11 @@ public class DescriptionActivity extends AppCompatActivity {
     String ipStr = address + "/" + cidr;
     String numHostsStr = "" + numHosts;
 
-    textView3.setText( broadcast );
-    textView4.setText( ipNetmask );
-    textView5.setText( ipStr );
-    textView6.setText( numHostsStr );
-    textView7.setText( ipRange );
-    textView8.setText( usableRange );
+    broadcastTv.setText( broadcast );
+    netmaskTv.setText( ipNetmask );
+    ipTv.setText( ipStr );
+    hostsTv.setText( numHostsStr );
+    addressRangeTv.setText( ipRange );
+    usableRangeTv.setText( usableRange );
   }
 }
