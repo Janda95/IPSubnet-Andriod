@@ -28,6 +28,7 @@ public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
     LayoutInflater inflater = (LayoutInflater) context
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     View rowView = inflater.inflate(R.layout.cheatsheet_list_item, parent, false);
+
     TextView bitsTv = rowView.findViewById(R.id.bitsItemTv);
     TextView netmaskTv = rowView.findViewById(R.id.netmaskItemTv);
     TextView hostsTv = rowView.findViewById(R.id.hostsItemTv);
@@ -38,6 +39,4 @@ public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
 
     return rowView;
   }
-
-
 }
