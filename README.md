@@ -1,17 +1,17 @@
-# IPSubnet-Andriod 
+# IPSubnet-Android 
 ### Master: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=master)](https://travis-ci.org/Janda95/IPSubnet-Android)
 
 ### Development: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=dev)](https://travis-ci.org/Janda95/IPSubnet-Android)
 
 Summary:
-Andriod application for viewing, calculating, and displaying split IP addresses on a mobile android device.
+Android application for viewing, calculating, and displaying split IP addresses on a mobile android device.
 
 Disclaimer:
 Current Version is not on app store and is currently a work in progress for personal use. If you would like to download and modify this code for personal use then feel free! This is a personal project for my father who requested an application for a subnet calculator drawing inspiration from a web application that does something similar.
 
 # My development environment:
 - OS: Ubuntu 18.04.1 LTS (Bionic Beaver)
-- AndriodSDK Version: 3.5
+- AndroidSDK Version: 3.5
 - Minimum Application API: 21 (5.0 Lollipop)
 - Target Application API: 28 (9.0 Pie)
 - Google Java Style Guide
