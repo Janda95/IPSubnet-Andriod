@@ -1,4 +1,4 @@
-package com.example.subnetapp.activities;
+package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.subnetapp.R;
-import com.example.subnetapp.adapters.IpArrayAdapter;
-import com.example.subnetapp.models.BinaryTree;
-import com.example.subnetapp.models.Node;
-import com.example.subnetapp.models.SubnetCalculator;
+import com.jlrutilities.subnetapp.R;
+import com.jlrutilities.subnetapp.adapters.IpArrayAdapter;
+import com.jlrutilities.subnetapp.models.BinaryTree;
+import com.jlrutilities.subnetapp.models.Node;
+import com.jlrutilities.subnetapp.models.SubnetCalculator;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 

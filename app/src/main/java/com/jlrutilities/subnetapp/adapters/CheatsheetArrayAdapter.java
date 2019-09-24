@@ -1,4 +1,4 @@
-package com.example.subnetapp.adapters;
+package com.jlrutilities.subnetapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.subnetapp.R;
+import com.jlrutilities.subnetapp.R;
 
 public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
   private final Context context;

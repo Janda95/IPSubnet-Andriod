@@ -1,4 +1,4 @@
-package com.example.subnetapp.models;
+package com.jlrutilities.subnetapp.models;
 
 public class BinaryTree {
 
