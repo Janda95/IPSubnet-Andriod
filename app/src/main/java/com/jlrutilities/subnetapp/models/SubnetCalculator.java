@@ -1,7 +1,6 @@
-package com.example.subnetapp.models;
+package com.jlrutilities.subnetapp.models;
 
 public class SubnetCalculator {
-
 
   //For using functions in SplitterActivity
   public SubnetCalculator(){}
@@ -84,7 +83,6 @@ public class SubnetCalculator {
 
     int num = 32 - cidr;
     int allHosts = (int) Math.pow(2, num) -1;
-
 
     long startInt = Long.parseLong(binaryIp,2);
     long endInt = startInt + allHosts;

@@ -1,4 +1,4 @@
-package com.example.subnetapp.adapters;
+package com.jlrutilities.subnetapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.subnetapp.R;
+import com.jlrutilities.subnetapp.R;
 
 public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
@@ -28,6 +28,7 @@ public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
     LayoutInflater inflater = (LayoutInflater) context
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     View rowView = inflater.inflate(R.layout.cheatsheet_list_item, parent, false);
+
     TextView bitsTv = rowView.findViewById(R.id.bitsItemTv);
     TextView netmaskTv = rowView.findViewById(R.id.netmaskItemTv);
     TextView hostsTv = rowView.findViewById(R.id.hostsItemTv);
@@ -38,6 +39,4 @@ public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
 
     return rowView;
   }
-
-
 }

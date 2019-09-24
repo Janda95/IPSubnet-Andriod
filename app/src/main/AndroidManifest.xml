@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.subnetapp">
+    package="com.jlrutilities.subnetapp">
 
     <application
         android:allowBackup="true"
@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.DescriptionActivity"
+            android:name="com.jlrutilities.subnetapp.activities.DescriptionActivity"
             android:label="@string/title_activity_description">
         </activity>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name="com.jlrutilities.subnetapp.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CheatsheetActivity"
+        <activity android:name="com.jlrutilities.subnetapp.activities.CheatsheetActivity"
             android:label="Hosts Lookup"/>
-        <activity android:name=".activities.SplitterActivity"
+        <activity android:name="com.jlrutilities.subnetapp.activities.SplitterActivity"
             android:configChanges="orientation|screenSize"
             android:label="Subnet Splitter"/>
     </application>

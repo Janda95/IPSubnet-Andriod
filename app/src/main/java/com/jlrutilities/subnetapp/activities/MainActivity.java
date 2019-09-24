@@ -1,4 +1,4 @@
-package com.example.subnetapp.activities;
+package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -10,8 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.subnetapp.R;
-
+import com.jlrutilities.subnetapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    initVariables();
+    init();
   }
 
-  private void initVariables() {
+  private void init() {
     //Init TextView
     inputTextView = findViewById(R.id.ipEntryTv);
 
@@ -71,17 +70,18 @@ public class MainActivity extends AppCompatActivity {
 
     //Intent
     Intent intent = new Intent( this, SplitterActivity.class);
-
     intent.putExtra(IP_STRING_MESSAGE, message);
     intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
     startActivity(intent);
   }
 
+  //Reset input
   public void clearInput(View view){
     inputTextView.setText("");
     spinner.setSelection(defaultNetmask);
   }
 
+  //Validate Input
   private boolean isValid(String[] array) {
     //Number of Tokens
     if (array.length != 4) {

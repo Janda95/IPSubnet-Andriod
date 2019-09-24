@@ -1,4 +1,4 @@
-package com.example.subnetapp.models;
+package com.jlrutilities.subnetapp.models;
 
 public class Node {
   //values
@@ -12,7 +12,6 @@ public class Node {
 
   //Constructors
   public Node(int cidr, String ipBinary, String ipAddress, int numberOfHosts) {
-
     this.cidr = cidr;
     this.ipBinary = ipBinary;
     this.ipAddress = ipAddress;

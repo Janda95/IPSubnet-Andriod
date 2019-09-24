@@ -1,4 +1,4 @@
-package com.example.subnetapp.models;
+package com.jlrutilities.subnetapp.models;
 
 public class BinaryTree {
 
@@ -104,6 +104,7 @@ public class BinaryTree {
     if (node == null) {
       return;
     }
+
     Node left = node.getLeft();
     Node right = node.getRight();
 
@@ -117,6 +118,7 @@ public class BinaryTree {
     node.setChildrenNull();
   }
 
+  //Size of entire tree
   public int size() {
     size(root);
     int value = flag;
@@ -124,6 +126,7 @@ public class BinaryTree {
     return value;
   }
 
+  //Size of lowest layer of each branch
   public int sizeBottomLayer() {
     sizeBottomLayer(root);
     int value = flag;

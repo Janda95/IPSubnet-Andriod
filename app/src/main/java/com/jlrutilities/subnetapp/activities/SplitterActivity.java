@@ -1,4 +1,4 @@
-package com.example.subnetapp.activities;
+package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.subnetapp.R;
-import com.example.subnetapp.adapters.IpArrayAdapter;
-import com.example.subnetapp.models.BinaryTree;
-import com.example.subnetapp.models.Node;
-import com.example.subnetapp.models.SubnetCalculator;
+import com.jlrutilities.subnetapp.R;
+import com.jlrutilities.subnetapp.adapters.IpArrayAdapter;
+import com.jlrutilities.subnetapp.models.BinaryTree;
+import com.jlrutilities.subnetapp.models.Node;
+import com.jlrutilities.subnetapp.models.SubnetCalculator;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 
@@ -57,7 +57,7 @@ public class SplitterActivity extends AppCompatActivity {
     //tree list implementation
     list = findViewById(R.id.android_list);
 
-    refreshListBottom();
+    refreshList();
 
     //On click
     list.setOnItemClickListener((parent, view, position, id) -> {
@@ -96,7 +96,7 @@ public class SplitterActivity extends AppCompatActivity {
       return;
     } else {
       tree.merge(parent);
-      refreshListBottom();
+      refreshList();
       Toast.makeText(getApplicationContext(),"Merged",
           Toast.LENGTH_SHORT).show();
     }
@@ -113,7 +113,7 @@ public class SplitterActivity extends AppCompatActivity {
       node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
       node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
 
-      refreshListBottom();
+      refreshList();
       Toast.makeText(getApplicationContext(),"Split",
           Toast.LENGTH_SHORT).show();
     } else {
@@ -122,7 +122,7 @@ public class SplitterActivity extends AppCompatActivity {
     }
   }
 
-  private void refreshListBottom(){
+  private void refreshList(){
     //Bottom Layer Nodes
     nodes = new Node[tree.size()];
     nodeIps = new String[tree.sizeBottomLayer()];

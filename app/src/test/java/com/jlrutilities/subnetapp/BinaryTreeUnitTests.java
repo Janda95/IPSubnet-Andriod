@@ -1,7 +1,7 @@
-package com.example.subnetapp;
+package com.jlrutilities.subnetapp;
 
-import com.example.subnetapp.models.BinaryTree;
-import com.example.subnetapp.models.Node;
+import com.jlrutilities.subnetapp.models.BinaryTree;
+import com.jlrutilities.subnetapp.models.Node;
 
 import org.junit.Test;
 

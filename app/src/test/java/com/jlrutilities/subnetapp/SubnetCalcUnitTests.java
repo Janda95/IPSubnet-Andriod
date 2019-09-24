@@ -1,6 +1,6 @@
-package com.example.subnetapp;
+package com.jlrutilities.subnetapp;
 
-import com.example.subnetapp.models.SubnetCalculator;
+import com.jlrutilities.subnetapp.models.SubnetCalculator;
 
 import org.junit.Test;
 
