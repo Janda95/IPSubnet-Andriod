@@ -10,7 +10,9 @@ This is an Android application for viewing, calculating splits, and displaying I
 
 ## Disclaimer
 
-Current Version is not on app store and is currently a work in progress for personal use. If you would like to download and modify this code for personal use then feel free! This is a personal project for my father who requested an application for a subnet calculator drawing inspiration from a web application that does something similar.
+The current version is not on yet on the Google Play app store, and is currently a work in progress, for personal use. If you would like to download and modify this code for personal use, then feel free to fork! PRs are welcome.
+
+This is a personal project for my father, who requested an application for a mobile subnet calculator, drawing inspiration from the [Visual Subnet Calculator](http://www.davidc.net/sites/default/subnets/subnets.htm) web application.
 
 ## Development environment
 
