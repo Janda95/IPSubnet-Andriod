@@ -1,6 +1,9 @@
 package com.jlrutilities.subnetapp.models;
 
-public class Node {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Node implements Parcelable {
   //values
   public String ipAddress;
   public String ipBinary;
@@ -58,4 +61,40 @@ public class Node {
     right = null;
   }
 
+  protected Node(Parcel in) {
+    ipAddress = in.readString();
+    ipBinary = in.readString();
+    cidr = in.readInt();
+    numberOfHosts = in.readInt();
+    left = (Node) in.readValue(Node.class.getClassLoader());
+    right = (Node) in.readValue(Node.class.getClassLoader());
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(ipAddress);
+    dest.writeString(ipBinary);
+    dest.writeInt(cidr);
+    dest.writeInt(numberOfHosts);
+    dest.writeValue(left);
+    dest.writeValue(right);
+  }
+
+  @SuppressWarnings("unused")
+  public static final Parcelable.Creator<Node> CREATOR = new Parcelable.Creator<Node>() {
+    @Override
+    public Node createFromParcel(Parcel in) {
+      return new Node(in);
+    }
+
+    @Override
+    public Node[] newArray(int size) {
+      return new Node[size];
+    }
+  };
 }
