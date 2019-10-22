@@ -1,13 +1,13 @@
 package com.jlrutilities.subnetapp.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-/*
+
+import com.jlrutilities.subnetapp.R;
+
 public class RecyclerViewFragment extends Fragment {
 
   private static final String TAG = "RecyclerViewFragment";
@@ -15,20 +15,19 @@ public class RecyclerViewFragment extends Fragment {
   private String[] mDataSet;
 
   @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     initDataset();
   }
 
-  @Nullable
   @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return super.onCreateView(inflater, container, savedInstanceState);
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View rootView = inflater.inflate(R.layout.fragment_splitter, container, false);
+    return rootView;
   }
 
   @Override
-  public void onSaveInstanceState(@NonNull Bundle outState) {
+  public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
   }
 
@@ -39,4 +38,3 @@ public class RecyclerViewFragment extends Fragment {
     }
   }
 }
-*/
