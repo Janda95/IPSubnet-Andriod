@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.jlrutilities.subnetapp.R;
 import com.jlrutilities.subnetapp.fragments.MainActivityFragment;
 
-public class MainActivity extends AppCompatActivity implements MainActivityFragment.FragmentListener {
+public class MainActivity extends AppCompatActivity {
 
   EditText inputTextView;
   Spinner spinner;
