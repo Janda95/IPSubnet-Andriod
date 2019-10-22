@@ -11,8 +11,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jlrutilities.subnetapp.R;
+import com.jlrutilities.subnetapp.fragments.MainActivityFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.FragmentListener {
 
   EditText inputTextView;
   Spinner spinner;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     spinner.setSelection(defaultNetmask);
 
     //Dialog Builder
-    builder = new AlertDialog.Builder(this);
+    builder = new AlertDialog.Builder(MainActivity.this);
   }
 
   //Transition to Cheatsheet View

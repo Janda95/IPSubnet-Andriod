@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context="com.jlrutilities.subnetapp.fragments.MainActivityFragment"
+    tools:showIn="@layout/activity_main">
 
     <Spinner
         android:id="@+id/subnet_spinner"
