@@ -43,7 +43,18 @@ public class DetailFragment extends Fragment {
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    //Bundle args = getArguments();
+
+
     View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+
+    broadcastTv = rootView.findViewById( R.id.broadcastTv);
+    netmaskTv = rootView.findViewById( R.id.netmaskTv );
+    ipTv = rootView.findViewById( R.id.ipTv );
+    hostsTv = rootView.findViewById( R.id.hostsTv );
+    addressRangeTv = rootView.findViewById( R.id.addressRangeTv);
+    usableRangeTv = rootView.findViewById( R.id.usableRangeTv);
+
     return rootView;
   }
 }

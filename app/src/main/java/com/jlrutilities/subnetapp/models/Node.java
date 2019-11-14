@@ -4,33 +4,42 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Node implements Parcelable {
-  //values
-  public String ipAddress;
-  public String ipBinary;
-  public int cidr;
-  public int numberOfHosts;
+  // Values
+  private String ipAddress;
+  private String ipBinary;
+  private String broadcastIp;
+  private String fullIpRange;
+  private String usableIpRange;
+  private String netmask;
+  private int cidr;
+  private int numberOfHosts;
 
+  // Child nodes
   private Node left;
   private Node right;
 
   //Constructors
-  public Node(int cidr, String ipBinary, String ipAddress, int numberOfHosts) {
+  public Node(int cidr, String ipBinary, String ipAddress, int numberOfHosts, String broadcastIp, String fullIpRange, String usableIpRange, String netmask) {
     this.cidr = cidr;
     this.ipBinary = ipBinary;
     this.ipAddress = ipAddress;
     this.numberOfHosts = numberOfHosts;
+    this.broadcastIp = broadcastIp;
+    this.fullIpRange = fullIpRange;
+    this.usableIpRange = usableIpRange;
+    this.netmask = netmask;
 
     left = null;
     right = null;
   }
 
   //setters
-  public void setLeft(int cidr, String ipBinary, String ipAddress, int numberOfHosts){
-    left = new Node(cidr, ipBinary, ipAddress, numberOfHosts);
+  public void setLeft(int cidr, String ipBinary, String ipAddress, int numberOfHosts, String broadcastIp, String fullIpRange, String usableIpRange, String netmask){
+    left = new Node(cidr, ipBinary, ipAddress, numberOfHosts, broadcastIp, fullIpRange, usableIpRange, netmask);
   }
 
-  public void setRight(int cidr, String ipBinary, String ipAddress, int numberOfHosts){
-    right = new Node(cidr, ipBinary, ipAddress, numberOfHosts);
+  public void setRight(int cidr, String ipBinary, String ipAddress, int numberOfHosts, String broadcastIp, String fullIpRange, String usableIpRange, String netmask){
+    right = new Node(cidr, ipBinary, ipAddress, numberOfHosts, broadcastIp, fullIpRange, usableIpRange, netmask);
   }
 
   //getters
@@ -47,6 +56,14 @@ public class Node implements Parcelable {
   }
 
   public int getNumberOfHosts() { return numberOfHosts; }
+
+  public String getBroadcastIp() { return broadcastIp; }
+
+  public String getFullIpRange() { return fullIpRange; }
+
+  public String getUsableIpRange() { return usableIpRange; }
+
+  public String getNetmask() { return netmask; }
 
   public Node getLeft(){
     return left;
@@ -66,6 +83,10 @@ public class Node implements Parcelable {
     ipBinary = in.readString();
     cidr = in.readInt();
     numberOfHosts = in.readInt();
+    broadcastIp = in.readString();
+    fullIpRange = in.readString();
+    usableIpRange = in.readString();
+    netmask = in.readString();
     left = (Node) in.readValue(Node.class.getClassLoader());
     right = (Node) in.readValue(Node.class.getClassLoader());
   }
@@ -81,6 +102,10 @@ public class Node implements Parcelable {
     dest.writeString(ipBinary);
     dest.writeInt(cidr);
     dest.writeInt(numberOfHosts);
+    dest.writeString(broadcastIp);
+    dest.writeString(fullIpRange);
+    dest.writeString(usableIpRange);
+    dest.writeString(netmask);
     dest.writeValue(left);
     dest.writeValue(right);
   }

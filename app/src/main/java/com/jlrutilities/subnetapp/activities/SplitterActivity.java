@@ -33,49 +33,75 @@ public class SplitterActivity extends AppCompatActivity {
 
   private ListView list;
   SwipeActionAdapter mAdapter;
+  private boolean mTwoPane;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splitter);
-
     subnetCalc = new SubnetCalculator();
 
-    Intent intent = getIntent();
-    String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
-    String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
+    if(savedInstanceState == null){
 
-    int cidr = Integer.parseInt(cidrString);
-    String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
-    String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
-    ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
-    int numOfHosts = subnetCalc.numberOfHosts(cidr);
+      Intent intent = getIntent();
+      String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
+      String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
 
-    tree = new BinaryTree();
-    tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts);
+      int cidr = Integer.parseInt(cidrString);
+      String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
+      String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
+      ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
 
-    //tree list implementation
+      int numOfHosts = subnetCalc.numberOfHosts(cidr);
+      String netmask = subnetCalc.subnetMask( cidr );
+      String range = subnetCalc.rangeOfAddresses(ipBinary, cidr);
+      String usableRange = subnetCalc.usableIpAddresses(ipBinary, cidr);
+
+      String broadcast = subnetCalc.broadcastAddress(ipBinary, cidr);
+
+      tree = new BinaryTree();
+      tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts, broadcast, range, usableRange , netmask);
+
+      //tree list implementation
+    } else {
+      tree = savedInstanceState.getParcelable("myTree");
+    }
+
     list = findViewById(R.id.android_list);
-
     refreshList();
+
+    //Check if MasterDetailView Available
+    if (findViewById(R.id.fragment_detail_container) != null) {
+      mTwoPane = true;
+    }
 
     //On click
     list.setOnItemClickListener((parent, view, position, id) -> {
-      Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
+      if(mTwoPane){
+        //create and populate fragment container
+      } else {
+        Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
 
-      int refPosition = nodeLocations[position];
-      Node node = nodes[refPosition];
-      int cidrIntent = node.getCidr();
-      String address = node.getIpAddress();
-      String binaryNum = node.getIpBinary();
+        int refPosition = nodeLocations[position];
+        Node node = nodes[refPosition];
+        int cidrIntent = node.getCidr();
+        String address = node.getIpAddress();
+        String binaryNum = node.getIpBinary();
 
-      intent1.putExtra(CIDR_MESSAGE, cidrIntent);
-      intent1.putExtra(ADDRESS_MESSAGE, address);
-      intent1.putExtra(BINARY_IP_MESSAGE, binaryNum);
+        intent1.putExtra(CIDR_MESSAGE, cidrIntent);
+        intent1.putExtra(ADDRESS_MESSAGE, address);
+        intent1.putExtra(BINARY_IP_MESSAGE, binaryNum);
 
-      startActivity(intent1);
+        startActivity(intent1);
+      }
     });
   }
+
+ @Override
+ protected void onSaveInstanceState(Bundle savedInstanceState){
+    super.onSaveInstanceState(savedInstanceState);
+    savedInstanceState.putParcelable("myTree", tree);
+ }
 
   //finds parent node and tells parent remove
   private void merge(){
@@ -105,13 +131,28 @@ public class SplitterActivity extends AppCompatActivity {
   private void split(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
+    int cidr = node.getCidr();
+    String binaryIp = node.getIpBinary();
 
-    if (node.getLeft() == null && node.getRight() == null && node.cidr != 32) {
-      String splitIp = subnetCalc.ipSplit(node.ipBinary, node.cidr);
+    if (node.getLeft() == null && node.getRight() == null && cidr != 32) {
+      // Split current node and set child nodes
+      String splitIp = subnetCalc.ipSplit(node.getIpBinary(), cidr);
       String formatIp = subnetCalc.ipBinaryToFormat(splitIp);
-      int numOfHosts = subnetCalc.numberOfHosts(node.cidr+1);
-      node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
-      node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
+      int numOfHosts = subnetCalc.numberOfHosts(cidr+1);
+      String newNetmask = subnetCalc.subnetMask( cidr+1 );
+
+      // Left Split
+      String leftRange = subnetCalc.rangeOfAddresses(binaryIp, cidr+1);
+      String leftUsableRange = subnetCalc.usableIpAddresses(binaryIp, cidr+1);
+      String leftBroadcast = subnetCalc.broadcastAddress(binaryIp, cidr+1);
+
+      //Right Split
+      String rightRange = subnetCalc.rangeOfAddresses(splitIp, cidr+1);
+      String rightUsableRange = subnetCalc.usableIpAddresses(splitIp, cidr+1);
+      String rightBroadcast = subnetCalc.broadcastAddress(splitIp, cidr+1);
+
+      node.setLeft(cidr+1, node.getIpBinary(), node.getIpAddress(), numOfHosts, leftBroadcast, leftRange, leftUsableRange, newNetmask);
+      node.setRight(cidr+1, splitIp, formatIp, numOfHosts, rightBroadcast, rightRange, rightUsableRange, newNetmask );
 
       refreshList();
       Toast.makeText(getApplicationContext(),"Split",
