@@ -1,14 +1,23 @@
 package com.jlrutilities.subnetapp.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.jlrutilities.subnetapp.R;
 import com.jlrutilities.subnetapp.adapters.IpArrayAdapter;
+import com.jlrutilities.subnetapp.fragments.DetailFragment;
+import com.jlrutilities.subnetapp.fragments.HelpDialogFragment;
 import com.jlrutilities.subnetapp.models.BinaryTree;
 import com.jlrutilities.subnetapp.models.Node;
 import com.jlrutilities.subnetapp.models.SubnetCalculator;
@@ -17,10 +26,7 @@ import com.wdullaer.swipeactionadapter.SwipeDirection;
 
 public class SplitterActivity extends AppCompatActivity {
 
-  protected static final String BINARY_IP_MESSAGE = "com.example.BINARYIP.Message";
-  protected static final String ADDRESS_MESSAGE = "com.example.ADDRESS.MESSAGE";
-  protected static final String CIDR_MESSAGE = "com.example.CIDR.MESSAGE";
-
+  private static final String MY_TREE = "my_tree";
   SubnetCalculator subnetCalc;
   BinaryTree tree;
 
@@ -64,43 +70,56 @@ public class SplitterActivity extends AppCompatActivity {
 
       //tree list implementation
     } else {
-      tree = savedInstanceState.getParcelable("myTree");
+      tree = savedInstanceState.getParcelable(MY_TREE);
+    }
+
+    //Check if MasterDetailView Available
+    ViewGroup fragmentContainer = findViewById(R.id.fragment_detail_container);
+    if (fragmentContainer != null) {
+      mTwoPane = true;
     }
 
     list = findViewById(R.id.android_list);
     refreshList();
 
-    //Check if MasterDetailView Available
-    if (findViewById(R.id.fragment_detail_container) != null) {
-      mTwoPane = true;
-    }
-
     //On click
     list.setOnItemClickListener((parent, view, position, id) -> {
       if(mTwoPane){
         //create and populate fragment container
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        int refPosition = nodeLocations[position];
+        Node node = nodes[refPosition];
+
+        DetailFragment fragment = DetailFragment.newInstance(node);
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragment_detail_container, fragment)
+            .commit();
       } else {
+        // Transition to Description Activity
         Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
 
         int refPosition = nodeLocations[position];
         Node node = nodes[refPosition];
-        int cidrIntent = node.getCidr();
-        String address = node.getIpAddress();
-        String binaryNum = node.getIpBinary();
 
-        intent1.putExtra(CIDR_MESSAGE, cidrIntent);
-        intent1.putExtra(ADDRESS_MESSAGE, address);
-        intent1.putExtra(BINARY_IP_MESSAGE, binaryNum);
+        intent1.putExtra("node_key", node);
 
         startActivity(intent1);
       }
     });
   }
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.splitter_menu, menu);
+    return true;
+  }
+
  @Override
  protected void onSaveInstanceState(Bundle savedInstanceState){
     super.onSaveInstanceState(savedInstanceState);
-    savedInstanceState.putParcelable("myTree", tree);
+    savedInstanceState.putParcelable(MY_TREE, tree);
  }
 
   //finds parent node and tells parent remove
@@ -244,5 +263,11 @@ public class SplitterActivity extends AppCompatActivity {
         }
       }
     });
+  }
+
+  public void displayHelpDialog(MenuItem item) {
+    HelpDialogFragment dialogFragment = new HelpDialogFragment();
+    //dialogFragment.setCancelable(false);
+    dialogFragment.show(getSupportFragmentManager(), "DIALOG_FRAGMENT");
   }
 }

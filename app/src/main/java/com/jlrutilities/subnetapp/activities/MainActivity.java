@@ -1,9 +1,9 @@
 package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jlrutilities.subnetapp.R;
-import com.jlrutilities.subnetapp.fragments.MainActivityFragment;
 
 public class MainActivity extends AppCompatActivity {
 

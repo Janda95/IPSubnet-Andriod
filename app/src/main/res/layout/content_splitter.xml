@@ -4,5 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_id_main"
-    class="com.jlrutilities.subnetapp.fragments.RecyclerViewFragment"
+    class="com.jlrutilities.subnetapp.fragments.ListViewFragment"
     tools:layout="@layout/fragment_splitter"/>

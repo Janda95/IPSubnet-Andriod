@@ -16,15 +16,14 @@ import com.jlrutilities.subnetapp.models.SubnetCalculator;
 
 public class DetailFragment extends Fragment {
 
-  private static final String NODE_KEY = "node_key";
-  SubnetCalculator subnetCalc;
+  public static final String NODE_KEY = "node_key";
 
-  TextView usableRangeTv;
-  TextView addressRangeTv;
-  TextView hostsTv;
-  TextView ipTv;
-  TextView netmaskTv;
-  TextView broadcastTv;
+  private TextView usableRangeTv;
+  private TextView addressRangeTv;
+  private TextView hostsTv;
+  private TextView ipTv;
+  private TextView netmaskTv;
+  private TextView broadcastTv;
 
   public DetailFragment() {
   }
@@ -32,7 +31,7 @@ public class DetailFragment extends Fragment {
   public static DetailFragment newInstance(Node node){
 
     Bundle args = new Bundle();
-    args.putParcelable("NODE_KEY", node);
+    args.putParcelable(NODE_KEY, node);
 
     DetailFragment fragment = new DetailFragment();
     fragment.setArguments(args);
@@ -40,13 +39,16 @@ public class DetailFragment extends Fragment {
     return fragment;
   }
 
+  @Override
+  public void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+  }
+
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    //Bundle args = getArguments();
-
-
     View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+    Node node = getArguments().getParcelable(NODE_KEY);
 
     broadcastTv = rootView.findViewById( R.id.broadcastTv);
     netmaskTv = rootView.findViewById( R.id.netmaskTv );
@@ -54,6 +56,20 @@ public class DetailFragment extends Fragment {
     hostsTv = rootView.findViewById( R.id.hostsTv );
     addressRangeTv = rootView.findViewById( R.id.addressRangeTv);
     usableRangeTv = rootView.findViewById( R.id.usableRangeTv);
+
+    String broadcast = node.getBroadcastIp();
+    String ipNetmask = node.getNetmask();
+    String ipStr =  node.getIpAddress() + "/" + node.getCidr();
+    String numHostsStr = "" + node.getNumberOfHosts();
+    String ipRange = node.getFullIpRange();
+    String usableRange = node.getUsableIpRange();
+
+    broadcastTv.setText( broadcast );
+    netmaskTv.setText( ipNetmask );
+    ipTv.setText( ipStr );
+    hostsTv.setText( numHostsStr );
+    addressRangeTv.setText( ipRange );
+    usableRangeTv.setText( usableRange );
 
     return rootView;
   }
