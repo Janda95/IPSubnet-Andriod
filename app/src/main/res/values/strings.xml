@@ -30,4 +30,5 @@
     <string name="dialog_text_swipe_right">Swipe Right to Split IP Address</string>
     <string name="dialog_title">Help!</string>
     <string name="dialog_text_tap">Tap for More Info</string>
+    <string name="ip_dialog_explanation">Adjusted Ip Dialog Explanation</string>
 </resources>

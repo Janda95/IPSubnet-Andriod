@@ -2,6 +2,7 @@ package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,9 +12,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jlrutilities.subnetapp.R;
+import com.jlrutilities.subnetapp.fragments.IpAdjustmentDialogFragment;
+import com.jlrutilities.subnetapp.models.SubnetCalculator;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IpAdjustmentDialogFragment.IpAdjustmentDialogListener {
 
+  SubnetCalculator subnetCalc;
   EditText inputTextView;
   Spinner spinner;
   AlertDialog.Builder builder;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void init() {
+    subnetCalc = new SubnetCalculator();
+
     //Init TextView
     inputTextView = findViewById(R.id.ipEntryTv);
 
@@ -68,11 +74,24 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner = findViewById(R.id.subnet_spinner);
     String spinnerItem = spinner.getSelectedItem().toString();
 
-    //Intent
-    Intent intent = new Intent( this, SplitterActivity.class);
-    intent.putExtra(IP_STRING_MESSAGE, message);
-    intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
-    startActivity(intent);
+    int cidr = Integer.parseInt(spinnerItem);
+    String ipBinary = subnetCalc.ipFormatToBinary(message);
+    String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
+    String ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
+
+    //extra periods fix
+    message = subnetCalc.ipBinaryToFormat(ipBinary);
+
+    if (ipFormatted.equals(message)){
+      Intent intent = new Intent( this, SplitterActivity.class);
+      intent.putExtra(IP_STRING_MESSAGE, message);
+      intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
+      startActivity(intent);
+    } else {
+      //Ask user if adjustment is ok
+      IpAdjustmentDialogFragment dialogFragment = IpAdjustmentDialogFragment.newInstance(message, ipFormatted, spinnerItem);
+      dialogFragment.show(getSupportFragmentManager(), "DIALOG_FRAGMENT");
+    }
   }
 
   //Reset input
@@ -117,5 +136,20 @@ public class MainActivity extends AppCompatActivity {
       }
     }
     return true;
+  }
+
+  @Override
+  public void onDialogPositiveClick(DialogFragment dialog, String ipAddress, String cidr) {
+    //Intent
+    Intent intent = new Intent( this, SplitterActivity.class);
+    intent.putExtra(IP_STRING_MESSAGE, ipAddress);
+    intent.putExtra(CIDR_NETMASK_MESSAGE, cidr);
+    startActivity(intent);
+    dialog.dismiss();
+  }
+
+  @Override
+  public void onDialogNegativeClick(DialogFragment dialog) {
+    dialog.dismiss();
   }
 }

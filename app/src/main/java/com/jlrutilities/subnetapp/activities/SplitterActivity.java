@@ -55,8 +55,6 @@ public class SplitterActivity extends AppCompatActivity {
 
       int cidr = Integer.parseInt(cidrString);
       String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
-      String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
-      ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
 
       int numOfHosts = subnetCalc.numberOfHosts(cidr);
       String netmask = subnetCalc.subnetMask( cidr );
@@ -66,7 +64,7 @@ public class SplitterActivity extends AppCompatActivity {
       String broadcast = subnetCalc.broadcastAddress(ipBinary, cidr);
 
       tree = new BinaryTree();
-      tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts, broadcast, range, usableRange , netmask);
+      tree.setRoot(cidr, ipBinary, ipFormatted, numOfHosts, broadcast, range, usableRange , netmask);
 
       //tree list implementation
     } else {
