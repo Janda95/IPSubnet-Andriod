@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jlrutilities.subnetapp.R;
+import com.jlrutilities.subnetapp.adapters.CheatsheetArrayAdapter;
 import com.jlrutilities.subnetapp.fragments.IpAdjustmentDialogFragment;
 import com.jlrutilities.subnetapp.models.SubnetCalculator;
 
@@ -22,6 +25,11 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
   Spinner spinner;
   AlertDialog.Builder builder;
   private int defaultNetmask;
+
+  private ListView list;
+  String[] bitsArr;
+  String[] netmaskArr;
+  String[] hostsArr;
 
   protected static final String IP_STRING_MESSAGE = "com.example.IPSTRING.Message";
   protected static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
@@ -36,6 +44,12 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
   private void init() {
     subnetCalc = new SubnetCalculator();
 
+    //setup list fragment
+    list = findViewById(R.id.cheatsheet_list);
+    setupTableValues();
+    setupList();
+
+    //Setup form input fragment
     //Init TextView
     inputTextView = findViewById(R.id.ipEntryTv);
 
@@ -53,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
   }
 
   //Transition to Cheatsheet View
-  public void viewCheat(View view) {
+  public void viewCheat(Menu item) {
     Intent intent = new Intent( this, CheatsheetActivity.class);
     startActivity(intent);
   }
@@ -151,5 +165,23 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
   @Override
   public void onDialogNegativeClick(DialogFragment dialog) {
     dialog.dismiss();
+  }
+
+  private void setupTableValues(){
+    bitsArr = new String[25];
+    netmaskArr = new String[25];
+    hostsArr = new String[25];
+
+    //Generate CIDR 8-32 Values
+    for(int i = 8; i <= 32; i++){
+      bitsArr[i-8] = "/" + i;
+      netmaskArr[i-8] = subnetCalc.subnetMask(i);
+      hostsArr[i-8] = String.valueOf(subnetCalc.numberOfHosts(i));
+    }
+  }
+
+  private void setupList() {
+    ArrayAdapter aa = new CheatsheetArrayAdapter(this, bitsArr, netmaskArr, hostsArr);
+    list.setAdapter(aa);
   }
 }

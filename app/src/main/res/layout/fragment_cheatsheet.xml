@@ -27,7 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/bits_table_title"
-            android:textSize="18sp" />
+            android:textColor="@color/colorDefaultText"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/netmask_column"
@@ -35,7 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:text="@string/netmask_table_title"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorDefaultText"/>
 
         <TextView
             android:id="@+id/hosts_column"
@@ -43,7 +47,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:text="@string/usable_hosts_table_title"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorDefaultText"/>
     </LinearLayout>
 
     <ListView

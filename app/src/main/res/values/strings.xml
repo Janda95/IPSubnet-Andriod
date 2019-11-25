@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">IPv4 Subnet Calculator</string>
     <string name="slash">/</string>
-    <string name="to_cheatsheet">Cheatsheet</string>
+    <string name="to_cheatsheet">Host Lookup</string>
     <string name="update">Calculate</string>
     <string name="enter_ip">IP</string>
     <string name="splitter_netmask">Current NetMask</string>
