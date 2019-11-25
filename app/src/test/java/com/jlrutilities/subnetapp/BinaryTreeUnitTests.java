@@ -11,12 +11,12 @@ public class BinaryTreeUnitTests {
   BinaryTree binaryTree = new BinaryTree();
 
   public void setupTreeDummyData_3Layers_5Nodes(){
-    binaryTree.setRoot(1, "0000", "1.2.3.4", 1);
+    binaryTree.setRoot(1, "0000", "1.2.3.4", 1,  "", "", "", "");
     Node root = binaryTree.getRoot();
-    root.setLeft(2, "0001", "1.2.3.4", 2);
-    root.setRight(3, "0010", "1.2.3.4", 3);
-    root.getLeft().setLeft(4, "0011", "1.2.3.4", 4);
-    root.getLeft().setRight(5, "0100", "1.2.3.4", 5);
+    root.setLeft(2, "0001", "1.2.3.4", 2, "", "", "", "");
+    root.setRight(3, "0010", "1.2.3.4", 3,  "", "", "", "");
+    root.getLeft().setLeft(4, "0011", "1.2.3.4", 4, "", "", "", "");
+    root.getLeft().setRight(5, "0100", "1.2.3.4", 5,  "", "", "", "");
   }
 
   @Test
@@ -24,7 +24,7 @@ public class BinaryTreeUnitTests {
     setupTreeDummyData_3Layers_5Nodes();
     int location = 3;
     Node node = binaryTree.nthPreordernode(location);
-    assertEquals(4, node.cidr);
+    assertEquals(4, node.getCidr());
   }
 
   @Test
@@ -54,7 +54,7 @@ public class BinaryTreeUnitTests {
     setupTreeDummyData_3Layers_5Nodes();
     Node node = binaryTree.nthPreordernode(3);
     Node parent = binaryTree.findParent(node);
-    assertEquals(2, parent.cidr);
+    assertEquals(2, parent.getCidr());
   }
 
   @Test
