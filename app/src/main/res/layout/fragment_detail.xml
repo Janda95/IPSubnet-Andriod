@@ -9,10 +9,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +19,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="16dp"
-            android:paddingTop="16dp"
             android:paddingRight="16dp"
+            android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
             <TextView
@@ -36,18 +32,18 @@
                 android:layout_marginEnd="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/number_of_hosts_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,7 +54,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -68,7 +64,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/netmask_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -80,7 +76,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -90,7 +86,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/broadcast_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -101,7 +97,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -111,7 +107,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/address_range_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -122,7 +118,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -132,7 +128,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/usable_address_range_title"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -143,7 +139,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
         </LinearLayout>
     </ScrollView>

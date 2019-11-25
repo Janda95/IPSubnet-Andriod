@@ -20,8 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.jlrutilities.subnetapp.activities.CheatsheetActivity"
-            android:label="Hosts Lookup"/>
         <activity android:name="com.jlrutilities.subnetapp.activities.SplitterActivity"
             android:label="Subnet Splitter"/>
     </application>

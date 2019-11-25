@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -64,12 +63,6 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
 
     //Dialog Builder
     builder = new AlertDialog.Builder(MainActivity.this);
-  }
-
-  //Transition to Cheatsheet View
-  public void viewCheat(Menu item) {
-    Intent intent = new Intent( this, CheatsheetActivity.class);
-    startActivity(intent);
   }
 
   //Transition to Splitter View
