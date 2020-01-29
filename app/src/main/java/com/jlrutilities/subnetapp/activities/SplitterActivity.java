@@ -44,8 +44,14 @@ public class SplitterActivity extends AppCompatActivity {
     setContentView(R.layout.activity_splitter);
     subnetCalc = new SubnetCalculator();
 
-    if(savedInstanceState == null){
+    //Check if MasterDetailView Available
+    ViewGroup fragmentContainer = findViewById(R.id.fragment_detail_container);
+    if (fragmentContainer != null) {
+      mTwoPane = true;
+    }
 
+    // saved tree instance on rotation
+    if(savedInstanceState == null){
       Intent intent = getIntent();
       String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
       String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
@@ -66,12 +72,6 @@ public class SplitterActivity extends AppCompatActivity {
       //tree list implementation
     } else {
       tree = savedInstanceState.getParcelable(MY_TREE);
-    }
-
-    //Check if MasterDetailView Available
-    ViewGroup fragmentContainer = findViewById(R.id.fragment_detail_container);
-    if (fragmentContainer != null) {
-      mTwoPane = true;
     }
 
     list = findViewById(R.id.android_list);

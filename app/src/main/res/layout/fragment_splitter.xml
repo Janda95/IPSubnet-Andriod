@@ -13,6 +13,8 @@
         android:id="@+id/android_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8.0sp"
         android:layout_weight="0" />
 
 </LinearLayout>
