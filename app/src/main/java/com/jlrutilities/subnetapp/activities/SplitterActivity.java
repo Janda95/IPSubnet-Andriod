@@ -2,13 +2,19 @@ package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.jlrutilities.subnetapp.R;
 import com.jlrutilities.subnetapp.adapters.IpArrayAdapter;
+import com.jlrutilities.subnetapp.fragments.DetailFragment;
+import com.jlrutilities.subnetapp.fragments.HelpDialogFragment;
 import com.jlrutilities.subnetapp.models.BinaryTree;
 import com.jlrutilities.subnetapp.models.Node;
 import com.jlrutilities.subnetapp.models.SubnetCalculator;
@@ -17,10 +23,7 @@ import com.wdullaer.swipeactionadapter.SwipeDirection;
 
 public class SplitterActivity extends AppCompatActivity {
 
-  protected static final String BINARY_IP_MESSAGE = "com.example.BINARYIP.Message";
-  protected static final String ADDRESS_MESSAGE = "com.example.ADDRESS.MESSAGE";
-  protected static final String CIDR_MESSAGE = "com.example.CIDR.MESSAGE";
-
+  private static final String MY_TREE = "my_tree";
   SubnetCalculator subnetCalc;
   BinaryTree tree;
 
@@ -33,49 +36,86 @@ public class SplitterActivity extends AppCompatActivity {
 
   private ListView list;
   SwipeActionAdapter mAdapter;
+  private boolean mTwoPane;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splitter);
-
     subnetCalc = new SubnetCalculator();
 
-    Intent intent = getIntent();
-    String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
-    String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
+    //Check if MasterDetailView Available
+    ViewGroup fragmentContainer = findViewById(R.id.fragment_detail_container);
+    if (fragmentContainer != null) {
+      mTwoPane = true;
+    }
 
-    int cidr = Integer.parseInt(cidrString);
-    String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
-    String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
-    ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
-    int numOfHosts = subnetCalc.numberOfHosts(cidr);
+    // saved tree instance on rotation
+    if(savedInstanceState == null){
+      Intent intent = getIntent();
+      String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
+      String cidrString = intent.getStringExtra(MainActivity.CIDR_NETMASK_MESSAGE);
 
-    tree = new BinaryTree();
-    tree.setRoot(cidr, cutBinary, ipFormatted, numOfHosts);
+      int cidr = Integer.parseInt(cidrString);
+      String ipBinary = subnetCalc.ipFormatToBinary(ipFormatted);
 
-    //tree list implementation
+      int numOfHosts = subnetCalc.numberOfHosts(cidr);
+      String netmask = subnetCalc.subnetMask( cidr );
+      String range = subnetCalc.rangeOfAddresses(ipBinary, cidr);
+      String usableRange = subnetCalc.usableIpAddresses(ipBinary, cidr);
+
+      String broadcast = subnetCalc.broadcastAddress(ipBinary, cidr);
+
+      tree = new BinaryTree();
+      tree.setRoot(cidr, ipBinary, ipFormatted, numOfHosts, broadcast, range, usableRange , netmask);
+
+      //tree list implementation
+    } else {
+      tree = savedInstanceState.getParcelable(MY_TREE);
+    }
+
     list = findViewById(R.id.android_list);
-
     refreshList();
 
     //On click
     list.setOnItemClickListener((parent, view, position, id) -> {
-      Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
+      if(mTwoPane){
+        //create and populate fragment container
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-      int refPosition = nodeLocations[position];
-      Node node = nodes[refPosition];
-      int cidrIntent = node.getCidr();
-      String address = node.getIpAddress();
-      String binaryNum = node.getIpBinary();
+        int refPosition = nodeLocations[position];
+        Node node = nodes[refPosition];
 
-      intent1.putExtra(CIDR_MESSAGE, cidrIntent);
-      intent1.putExtra(ADDRESS_MESSAGE, address);
-      intent1.putExtra(BINARY_IP_MESSAGE, binaryNum);
+        DetailFragment fragment = DetailFragment.newInstance(node);
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragment_detail_container, fragment)
+            .commit();
+      } else {
+        // Transition to Description Activity
+        Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
 
-      startActivity(intent1);
+        int refPosition = nodeLocations[position];
+        Node node = nodes[refPosition];
+
+        intent1.putExtra("node_key", node);
+
+        startActivity(intent1);
+      }
     });
   }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.splitter_menu, menu);
+    return true;
+  }
+
+ @Override
+ protected void onSaveInstanceState(Bundle savedInstanceState){
+    super.onSaveInstanceState(savedInstanceState);
+    savedInstanceState.putParcelable(MY_TREE, tree);
+ }
 
   //finds parent node and tells parent remove
   private void merge(){
@@ -105,13 +145,28 @@ public class SplitterActivity extends AppCompatActivity {
   private void split(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
+    int cidr = node.getCidr();
+    String binaryIp = node.getIpBinary();
 
-    if (node.getLeft() == null && node.getRight() == null && node.cidr != 32) {
-      String splitIp = subnetCalc.ipSplit(node.ipBinary, node.cidr);
+    if (node.getLeft() == null && node.getRight() == null && cidr != 32) {
+      // Split current node and set child nodes
+      String splitIp = subnetCalc.ipSplit(node.getIpBinary(), cidr);
       String formatIp = subnetCalc.ipBinaryToFormat(splitIp);
-      int numOfHosts = subnetCalc.numberOfHosts(node.cidr+1);
-      node.setLeft(node.cidr+1, node.ipBinary, node.ipAddress, numOfHosts);
-      node.setRight(node.cidr+1, splitIp, formatIp, numOfHosts);
+      int numOfHosts = subnetCalc.numberOfHosts(cidr+1);
+      String newNetmask = subnetCalc.subnetMask( cidr+1 );
+
+      // Left Split
+      String leftRange = subnetCalc.rangeOfAddresses(binaryIp, cidr+1);
+      String leftUsableRange = subnetCalc.usableIpAddresses(binaryIp, cidr+1);
+      String leftBroadcast = subnetCalc.broadcastAddress(binaryIp, cidr+1);
+
+      //Right Split
+      String rightRange = subnetCalc.rangeOfAddresses(splitIp, cidr+1);
+      String rightUsableRange = subnetCalc.usableIpAddresses(splitIp, cidr+1);
+      String rightBroadcast = subnetCalc.broadcastAddress(splitIp, cidr+1);
+
+      node.setLeft(cidr+1, node.getIpBinary(), node.getIpAddress(), numOfHosts, leftBroadcast, leftRange, leftUsableRange, newNetmask);
+      node.setRight(cidr+1, splitIp, formatIp, numOfHosts, rightBroadcast, rightRange, rightUsableRange, newNetmask );
 
       refreshList();
       Toast.makeText(getApplicationContext(),"Split",
@@ -203,5 +258,11 @@ public class SplitterActivity extends AppCompatActivity {
         }
       }
     });
+  }
+
+  public void displayHelpDialog(MenuItem item) {
+    HelpDialogFragment dialogFragment = new HelpDialogFragment();
+    //dialogFragment.setCancelable(false);
+    dialogFragment.show(getSupportFragmentManager(), "DIALOG_FRAGMENT");
   }
 }

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">IPv4 Subnet Calculator</string>
     <string name="slash">/</string>
-    <string name="to_cheatsheet">Cheatsheet</string>
+    <string name="to_cheatsheet">Host Lookup</string>
     <string name="update">Calculate</string>
     <string name="enter_ip">IP</string>
     <string name="splitter_netmask">Current NetMask</string>
@@ -18,7 +18,6 @@
     <string name="address_range_title">Address Range:</string>
     <string name="usable_address_range_title">Usable Address Range:</string>
     <string name="clear">Clear</string>
-    <string name="list_view_instructions">Swipe Right: Split / Swipe Left: Merge / Tap: More Info</string>
     <string name="ip_image_content_description">IpImage</string>
     <string name="hosts_cheatsheet_item_tv">number of hosts</string>
     <string name="netmask_cheatsheet_item_tv">netmask</string>
@@ -26,4 +25,10 @@
     <string name="bits_table_title">Bits</string>
     <string name="usable_hosts_table_title">Usable Hosts</string>
     <string name="netmask_table_title">Netmask</string>
+    <string name="help">Help</string>
+    <string name="dialog_text_swipe_left">Swipe Left to Merge IP Address</string>
+    <string name="dialog_text_swipe_right">Swipe Right to Split IP Address</string>
+    <string name="dialog_title">Help!</string>
+    <string name="dialog_text_tap">Tap for More Info</string>
+    <string name="ip_dialog_explanation">Adjusted Ip Dialog Explanation</string>
 </resources>

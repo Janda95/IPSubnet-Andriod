@@ -1,6 +1,9 @@
 package com.jlrutilities.subnetapp.models;
 
-public class BinaryTree {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BinaryTree implements Parcelable {
 
   private Node root;
   private int flag = 0;
@@ -13,8 +16,8 @@ public class BinaryTree {
     return root;
   }
 
-  public void setRoot(int cidr, String ipBinary, String ipAddress, int numberOfHosts) {
-    root = new Node(cidr, ipBinary, ipAddress, numberOfHosts);
+  public void setRoot(int cidr, String ipBinary, String ipAddress, int numberOfHosts, String broadcastIp, String fullIpRange, String usableIpRange, String netmask) {
+    root = new Node(cidr, ipBinary, ipAddress, numberOfHosts, broadcastIp, fullIpRange, usableIpRange, netmask);
   }
 
   //Find Nth node starting with root
@@ -145,4 +148,32 @@ public class BinaryTree {
     return node;
   }
 
+  protected BinaryTree(Parcel in) {
+    root = (Node) in.readValue(Node.class.getClassLoader());
+    flag = in.readInt();
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeValue(root);
+    dest.writeInt(flag);
+  }
+
+  @SuppressWarnings("unused")
+  public static final Parcelable.Creator<BinaryTree> CREATOR = new Parcelable.Creator<BinaryTree>() {
+    @Override
+    public BinaryTree createFromParcel(Parcel in) {
+      return new BinaryTree(in);
+    }
+
+    @Override
+    public BinaryTree[] newArray(int size) {
+      return new BinaryTree[size];
+    }
+  };
 }

@@ -9,8 +9,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_list_cell_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,8 +25,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:paddingTop="16dp"
+            android:paddingRight="16dp"
             android:paddingBottom="16dp">
 
             <TextView
@@ -32,7 +38,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorDefaultText"
-                android:textSize="30sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <TextView
