@@ -1,4 +1,4 @@
-# IPSubnet-Android 
+# IPSubnet-Android
 
 ## Master: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=master)](https://travis-ci.org/Janda95/IPSubnet-Android)
 
@@ -23,7 +23,7 @@ This is a personal project for my father, who requested an application for a mob
 - Google Java Style Guide
 - Travis CI Testing Integration
 
-##  Devices Tested
+## Devices Tested
 
 - Google Pixel 2 (Simulator)
 - S6 Edge+ (Physical)
@@ -37,6 +37,7 @@ This is a personal project for my father, who requested an application for a mob
 1. Clone from Github
 1. Open with Android Studio
 1. Sync Gradle (if option is requested).
+1. Add Google Api key xml file (see below)
 1. Run application and select available device
 
 ## How to run the application using simulator
@@ -51,9 +52,9 @@ This is a personal project for my father, who requested an application for a mob
 
 ## How to run the application using your device
 
-### Store:
+### Store Link
 
-- PENDING
+[IPv4 Google Play Store Link](https://play.google.com/store/apps/details?id=com.jlrutilities.subnetapp)
 
 ### Personal Device
 
@@ -61,12 +62,11 @@ This is a personal project for my father, who requested an application for a mob
 1. Plug into computer with appropriate cable while running Android Studio
 1. Run application with device to download non-production application onto device
 
-## Contributers
+## Contributers and Attributions
 
-# Attributions
 - Wouter Dullaert
 - Android ListView Swipe action library
-- https://github.com/wdullaer/SwipeActionAdapter
+- [Swipe Action Github Library Link](https://github.com/wdullaer/SwipeActionAdapter)
 
 Copyright [2019] [Jarek Rettinghouse]
 
