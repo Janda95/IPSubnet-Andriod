@@ -13,13 +13,13 @@
         android:id="@+id/ipAddressLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="IP Address"
+        android:text="@string/ip_address_label"
         android:textAlignment="center"
+        android:textColor="@color/colorSecondaryText"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/colorSecondaryText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Mask Bits"
+        android:text="@string/mask_bits_label"
         android:textAlignment="viewStart"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -45,6 +45,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints="@string/enter_ip"
         android:digits="0123456789."
         android:ems="10"
         android:hint="@string/enter_ip"
@@ -62,16 +63,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button_shape"
         android:onClick="clearInput"
         android:text="@string/clear"
+        android:textColor="#ffffff"
         android:textSize="18sp"
-        android:textColor="@color/cardview_light_background"
-        android:background="@drawable/custom_button_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/submitButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
+        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv"
+        tools:ignore="OnClick" />
 
     <Spinner
         android:id="@+id/subnet_spinner"
@@ -94,16 +96,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button_shape"
         android:onClick="subnetTransition"
         android:text="@string/update"
+        android:textColor="#ffffff"
         android:textSize="18sp"
-        android:textColor="@color/cardview_light_background"
-        android:background="@drawable/custom_button_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/clearIpInput"
-        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv" />
+        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/slashTv"

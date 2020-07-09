@@ -10,11 +10,10 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:minHeight="56dp"
+        android:layout_margin="1dp"
         android:orientation="horizontal"
+        android:background="@drawable/custom_list_cell_shape_primary_light"
         app:layout_constraintBottom_toTopOf="@+id/cheatsheet_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,42 +24,45 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:layout_margin="16dp"
             android:text="@string/bits_table_title"
-            android:textColor="@color/colorSecondaryText"
+            android:textColor="@color/colorDefaultText"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textAlignment="textEnd"/>
 
         <TextView
             android:id="@+id/netmask_column"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:layout_margin="16dp"
             android:text="@string/netmask_table_title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/colorSecondaryText"/>
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorDefaultText"/>
 
         <TextView
             android:id="@+id/hosts_column"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
+            android:layout_margin="16dp"
             android:text="@string/usable_hosts_table_title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/colorSecondaryText"/>
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorDefaultText"/>
     </LinearLayout>
 
     <ListView
         android:id="@+id/cheatsheet_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:divider="@android:color/background_light"
-        android:dividerHeight="8.0dp"
+        android:layout_margin="1dp"
+        android:dividerHeight="1dp"
+        android:divider="@color/colorPrimaryLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
