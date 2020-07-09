@@ -23,20 +23,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/maskBitsLabel"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:text="@string/mask_bits_label"
         android:textAlignment="viewStart"
+        android:textColor="@color/colorSecondaryText"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/colorSecondaryText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/submitButton"
+        app:layout_constraintStart_toStartOf="@+id/subnet_spinner"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <EditText
         android:id="@+id/ipEntryTv"
@@ -45,6 +46,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:autofillHints="@string/enter_ip"
         android:digits="0123456789."
         android:ems="10"
@@ -52,6 +54,7 @@
         android:imeOptions="actionDone"
         android:inputType="number"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/slashTv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ipAddressLabel" />
@@ -60,35 +63,32 @@
         android:id="@+id/clearIpInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/custom_button_shape"
         android:minWidth="64dp"
         android:minHeight="36dp"
-        android:onClick="clearInput"
-        android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/custom_button_shape"
+        android:onClick="clearInput"
         android:text="@string/clear"
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/submitButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitButton"
         tools:ignore="OnClick" />
 
     <Spinner
         android:id="@+id/subnet_spinner"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:minWidth="120dp"
         android:spinnerMode="dropdown"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/slashTv"
-        app:layout_constraintTop_toBottomOf="@+id/maskBitsLabel" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/clearIpInput"
+        app:layout_constraintTop_toBottomOf="@+id/ipAddressLabel" />
 
     <Button
         android:id="@+id/submitButton"
@@ -104,10 +104,9 @@
         android:text="@string/update"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/clearIpInput"
-        app:layout_constraintTop_toBottomOf="@+id/ipEntryTv"
+        app:layout_constraintStart_toEndOf="@+id/subnet_spinner"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
 
     <TextView
@@ -121,6 +120,7 @@
         android:textAlignment="textEnd"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/subnet_spinner"
         app:layout_constraintStart_toEndOf="@+id/ipEntryTv"
         app:layout_constraintTop_toBottomOf="@+id/maskBitsLabel" />
