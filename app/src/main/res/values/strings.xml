@@ -2,7 +2,7 @@
     <string name="app_name">IPv4 Subnet Calculator</string>
     <string name="slash">/</string>
     <string name="to_cheatsheet">Host Lookup</string>
-    <string name="update">Calculate</string>
+    <string name="update">Calc</string>
     <string name="enter_ip">IP</string>
     <string name="splitter_netmask">Current NetMask</string>
     <string name="splitter_ip">Original Ip:</string>
@@ -31,4 +31,10 @@
     <string name="dialog_title">Help!</string>
     <string name="dialog_text_tap">Tap for More Info</string>
     <string name="ip_dialog_explanation">Adjusted Ip Dialog Explanation</string>
+    <string name="ip_address_label">IP Address</string>
+    <string name="mask_bits_label">Mask Bits</string>
+    <string name="adjusted_ip_address_label">Adjusted Ip Address</string>
+    <string name="original_title_label">Original:</string>
+    <string name="adjusted_title_label">Adjusted:</string>
+    <string name="ip_address_dialog_label">Ip Address</string>
 </resources>

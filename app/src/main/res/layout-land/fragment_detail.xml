@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DescriptionActivity" >
+    tools:context=".activities.DescriptionActivity"
+    android:background="@color/colorPrimaryLight">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
         android:background="@drawable/custom_list_cell_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +27,7 @@
                 android:id="@+id/ipTv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginVertical="8dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorDefaultText"
                 android:textSize="36sp"
@@ -37,7 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -45,6 +44,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginVertical="4dp"
                     android:text="@string/netmask_title"
                     android:textAlignment="center"
                     android:textColor="@color/colorDefaultText"
@@ -56,6 +56,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginVertical="4dp"
                     android:text="@string/broadcast_title"
                     android:textAlignment="center"
                     android:textColor="@color/colorDefaultText"
@@ -68,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -93,7 +95,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -101,6 +103,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginVertical="4dp"
                     android:text="@string/address_range_title"
                     android:textAlignment="center"
                     android:textColor="@color/colorDefaultText"
@@ -112,6 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginVertical="4dp"
                     android:text="@string/usable_address_range_title"
                     android:textAlignment="center"
                     android:textColor="@color/colorDefaultText"
@@ -122,7 +126,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -130,6 +134,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginVertical="4dp"
                     android:textAlignment="center"
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="24sp" />
@@ -139,6 +144,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginVertical="4dp"
                     android:textAlignment="center"
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="24sp" />
@@ -149,7 +155,8 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
                 android:text="@string/number_of_hosts_title"
                 android:textAlignment="center"
                 android:textColor="@color/colorDefaultText"
@@ -160,6 +167,7 @@
                 android:id="@+id/hostsTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondaryText"

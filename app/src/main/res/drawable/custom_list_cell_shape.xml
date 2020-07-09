@@ -2,14 +2,14 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <gradient
-        android:startColor="#ccffff"
-        android:centerColor="#ffffff"
-        android:endColor="#ccffff"
+        android:startColor="@color/cardview_light_background"
+        android:centerColor="@color/cardview_light_background"
+        android:endColor="@color/cardview_light_background"
         android:angle="0"/>
 
     <corners
-        android:bottomRightRadius="18dp"
-        android:bottomLeftRadius="18dp"
-        android:topLeftRadius="18dp"
-        android:topRightRadius="18dp"/>
+        android:bottomRightRadius="4dp"
+        android:bottomLeftRadius="4dp"
+        android:topLeftRadius="4dp"
+        android:topRightRadius="4dp"/>
 </shape>
