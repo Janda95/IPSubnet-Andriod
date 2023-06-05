@@ -2,8 +2,8 @@ package com.jlrutilities.subnetapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.jlrutilities.subnetapp.R;
 import com.jlrutilities.subnetapp.fragments.DetailFragment;
