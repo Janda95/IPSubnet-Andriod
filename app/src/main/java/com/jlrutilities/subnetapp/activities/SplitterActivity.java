@@ -21,6 +21,7 @@ import com.jlrutilities.subnetapp.models.SubnetCalculator;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 
+
 //** Creates and populates splitter activity view, providing a user interface for rapid subnet splitting. */
 public class SplitterActivity extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class SplitterActivity extends AppCompatActivity {
   SwipeActionAdapter mAdapter;
   private boolean mTwoPane;
 
+  //** Creates and populates view on creation, phone rotation, and 2 pane view with larger screen size devices*/
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
