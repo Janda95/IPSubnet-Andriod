@@ -1,25 +1,21 @@
 # IPSubnet-Android
 
-## Master: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=master)](https://travis-ci.org/Janda95/IPSubnet-Android)
-
-## Development: [![Build Status](https://travis-ci.org/Janda95/IPSubnet-Android.svg?branch=dev)](https://travis-ci.org/Janda95/IPSubnet-Android)
-
 ## Summary
 
-This is an Android application for viewing, calculating splits, and displaying IPv4 network information.
+Android application for viewing, calculating, and displaying IPv4 network and sub-network information.
 
 ## Disclaimer
 
-The current version is not on yet on the Google Play app store, and is currently a work in progress, for personal use. If you would like to download and modify this code for personal use, then feel free to fork! PRs are welcome.
+The current version is available on the Google Play app store for personal use. If you would like to download and modify this code for personal use, then feel free to fork! PRs are welcome.
 
-This is a personal project for my father, who requested an application for a mobile subnet calculator, drawing inspiration from the [Visual Subnet Calculator](http://www.davidc.net/sites/default/subnets/subnets.htm) web application.
+Originally a personal project for father, who requested an application for a mobile subnet calculator, drawing inspiration from the [Visual Subnet Calculator](http://www.davidc.net/sites/default/subnets/subnets.htm) web application.
 
 ## Development environment
 
 - OS: Ubuntu 18.04.1 LTS (Bionic Beaver)
 - AndroidSDK Version: 3.5
-- Minimum Application API: 21 (5.0 Lollipop)
-- Target Application API: 28 (9.0 Pie)
+- Minimum Application API: 28 - Lollipop
+- Target Application API: 33 - Tiramisu
 - Google Java Style Guide
 - Travis CI Testing Integration
 
@@ -68,7 +64,7 @@ This is a personal project for my father, who requested an application for a mob
 - Android ListView Swipe action library
 - [Swipe Action Github Library Link](https://github.com/wdullaer/SwipeActionAdapter)
 
-Copyright [2019] [Jarek Rettinghouse]
+Copyright [2024] [Jarek Rettinghouse]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -84,4 +80,3 @@ limitations under the License.
 
 - [Jarek Rettinghouse (Janda95)](https://github.com/Janda95) - Developer / Project Owner
 - [Nick Rettinghouse (call-me-nick)](https://github.com/call-me-nick) - User feedback and PRs.
-
