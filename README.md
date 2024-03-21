@@ -8,6 +8,8 @@ Android application for viewing, calculating, and displaying IPv4 network and su
 
 The current version is available on the Google Play app store for personal use. If you would like to download and modify this code for personal use, then feel free to fork! PRs are welcome.
 
+[IPv4 Google Play Store Link](https://play.google.com/store/apps/details?id=com.jlrutilities.subnetapp)
+
 Originally a personal project for father, who requested an application for a mobile subnet calculator, drawing inspiration from the [Visual Subnet Calculator](http://www.davidc.net/sites/default/subnets/subnets.htm) web application.
 
 ## Development environment
