@@ -21,6 +21,7 @@ import com.jlrutilities.subnetapp.models.SubnetCalculator;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 
+//** Creates and populates splitter activity view, providing a user interface for rapid subnet splitting. */
 public class SplitterActivity extends AppCompatActivity {
 
   private static final String MY_TREE = "my_tree";
@@ -44,13 +45,13 @@ public class SplitterActivity extends AppCompatActivity {
     setContentView(R.layout.activity_splitter);
     subnetCalc = new SubnetCalculator();
 
-    //Check if MasterDetailView Available
+    // Check if MasterDetailView Available
     ViewGroup fragmentContainer = findViewById(R.id.fragment_detail_container);
     if (fragmentContainer != null) {
       mTwoPane = true;
     }
 
-    // saved tree instance on rotation
+    // Saved tree instance on phone rotation
     if(savedInstanceState == null){
       Intent intent = getIntent();
       String ipFormatted = intent.getStringExtra(MainActivity.IP_STRING_MESSAGE);
@@ -69,7 +70,6 @@ public class SplitterActivity extends AppCompatActivity {
       tree = new BinaryTree();
       tree.setRoot(cidr, ipBinary, ipFormatted, numOfHosts, broadcast, range, usableRange , netmask);
 
-      //tree list implementation
     } else {
       tree = savedInstanceState.getParcelable(MY_TREE);
     }
@@ -77,10 +77,9 @@ public class SplitterActivity extends AppCompatActivity {
     list = findViewById(R.id.android_list);
     refreshList();
 
-    //On click
+    // List OnClick Listener Action
     list.setOnItemClickListener((parent, view, position, id) -> {
       if(mTwoPane){
-        //create and populate fragment container
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         int refPosition = nodeLocations[position];
@@ -90,13 +89,13 @@ public class SplitterActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
             .replace(R.id.fragment_detail_container, fragment)
             .commit();
+
       } else {
         // Transition to Description Activity
         Intent intent1 = new Intent(getApplicationContext(), DescriptionActivity.class);
 
         int refPosition = nodeLocations[position];
         Node node = nodes[refPosition];
-
         intent1.putExtra("node_key", node);
 
         startActivity(intent1);
@@ -104,20 +103,21 @@ public class SplitterActivity extends AppCompatActivity {
     });
   }
 
+  //** Inflate available menu options if present in view. */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.splitter_menu, menu);
     return true;
   }
 
- @Override
- protected void onSaveInstanceState(Bundle savedInstanceState){
+  //** Saves network tree state for photo rotation and returning to view. */
+  @Override
+  protected void onSaveInstanceState(Bundle savedInstanceState){
     super.onSaveInstanceState(savedInstanceState);
     savedInstanceState.putParcelable(MY_TREE, tree);
- }
+  }
 
-  //finds parent node and tells parent remove
+  //** Finds parent node and removes all node branches and current node if applicable. */
   private void merge(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
@@ -134,6 +134,7 @@ public class SplitterActivity extends AppCompatActivity {
       Toast.makeText(getApplicationContext(),"Unable to merge",
           Toast.LENGTH_SHORT).show();
       return;
+
     } else {
       tree.merge(parent);
       refreshList();
@@ -142,6 +143,7 @@ public class SplitterActivity extends AppCompatActivity {
     }
   }
 
+  //** Splits current list item node to 2 subnet nodes and refreshes list. */
   private void split(){
     int refPosition = nodeLocations[pos];
     Node node = nodes[refPosition];
@@ -160,7 +162,7 @@ public class SplitterActivity extends AppCompatActivity {
       String leftUsableRange = subnetCalc.usableIpAddresses(binaryIp, cidr+1);
       String leftBroadcast = subnetCalc.broadcastAddress(binaryIp, cidr+1);
 
-      //Right Split
+      // Right Split
       String rightRange = subnetCalc.rangeOfAddresses(splitIp, cidr+1);
       String rightUsableRange = subnetCalc.usableIpAddresses(splitIp, cidr+1);
       String rightBroadcast = subnetCalc.broadcastAddress(splitIp, cidr+1);
@@ -171,14 +173,16 @@ public class SplitterActivity extends AppCompatActivity {
       refreshList();
       Toast.makeText(getApplicationContext(),"Split",
           Toast.LENGTH_SHORT).show();
+
     } else {
       Toast.makeText(getApplicationContext(),"Cannot Split /32",
           Toast.LENGTH_SHORT).show();
     }
   }
 
+  //** Refreshes list using current available tree structure. */
   private void refreshList(){
-    //Bottom Layer Nodes
+    // Bottom Layer Nodes
     nodes = new Node[tree.size()];
     nodeIps = new String[tree.sizeBottomLayer()];
     nodeLocations = new int[nodeIps.length];
@@ -189,7 +193,6 @@ public class SplitterActivity extends AppCompatActivity {
       nodes[i] = tree.nthPreordernode(i+1);
     }
 
-    //Bottom Layer Nodes
     int counter = 0;
     for(int i = 0; i < nodes.length; i++) {
       Node node = nodes[i];
@@ -210,8 +213,9 @@ public class SplitterActivity extends AppCompatActivity {
     setSwipeFunctionality();
   }
 
+  //* Sets actions when swiping list items. */
   private void setSwipeFunctionality(){
-    // Set backgrounds for the swipe directions
+    // Background colors during swiping animation
     mAdapter.addBackground(SwipeDirection.DIRECTION_NORMAL_LEFT,R.layout.row_bg_left)
         .addBackground(SwipeDirection.DIRECTION_NORMAL_RIGHT,R.layout.row_bg_right);
 
@@ -260,9 +264,9 @@ public class SplitterActivity extends AppCompatActivity {
     });
   }
 
+  //** Provides help dialog. */
   public void displayHelpDialog(MenuItem item) {
     HelpDialogFragment dialogFragment = new HelpDialogFragment();
-    //dialogFragment.setCancelable(false);
     dialogFragment.show(getSupportFragmentManager(), "DIALOG_FRAGMENT");
   }
 }

@@ -9,8 +9,8 @@ import com.jlrutilities.subnetapp.R;
 import com.jlrutilities.subnetapp.fragments.DetailFragment;
 import com.jlrutilities.subnetapp.models.Node;
 
+/** Creates and populates view displaying discription information for Subnet Node. */
 public class DescriptionActivity extends AppCompatActivity {
-
   private static final String NODE_KEY = "node_key";
 
   @Override
@@ -20,6 +20,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
     Node node = intent.getParcelableExtra(NODE_KEY);
+
     DetailFragment fragment = DetailFragment.newInstance(node);
     FragmentManager fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction()

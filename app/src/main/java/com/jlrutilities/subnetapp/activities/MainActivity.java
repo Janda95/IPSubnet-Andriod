@@ -17,6 +17,8 @@ import com.jlrutilities.subnetapp.adapters.CheatsheetArrayAdapter;
 import com.jlrutilities.subnetapp.fragments.IpAdjustmentDialogFragment;
 import com.jlrutilities.subnetapp.models.SubnetCalculator;
 
+
+/** Creates and populates main entry point for application. */
 public class MainActivity extends AppCompatActivity implements IpAdjustmentDialogFragment.IpAdjustmentDialogListener {
 
   SubnetCalculator subnetCalc;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
   protected static final String IP_STRING_MESSAGE = "com.example.IPSTRING.Message";
   protected static final String CIDR_NETMASK_MESSAGE = "com.example.NETMASK.Message";
 
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,19 +43,18 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
     init();
   }
 
+  //** Sets up reference tables and populates view. */
   private void init() {
     subnetCalc = new SubnetCalculator();
 
-    //setup list fragment
     list = findViewById(R.id.cheatsheet_list);
     setupTableValues();
-    setupList();
+    ArrayAdapter aa = new CheatsheetArrayAdapter(this, bitsArr, netmaskArr, hostsArr);
+    list.setAdapter(aa);
 
-    //Setup form input fragment
-    //Init TextView
+    // Init TextView and Spinner
     inputTextView = findViewById(R.id.ipEntryTv);
 
-    //Init Spinner
     spinner = findViewById(R.id.subnet_spinner);
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
         R.array.split_locations, R.layout.spinner_item);
@@ -61,23 +63,22 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
     defaultNetmask = 16; // default is "/24"
     spinner.setSelection(defaultNetmask);
 
-    //Dialog Builder
+    // Dialog Builder
     builder = new AlertDialog.Builder(MainActivity.this);
   }
 
-  //Transition to Splitter View
+  /** Transition to Splitter View. */
   public void subnetTransition(View view) {
-    //Get Text From View
     String message = inputTextView.getText().toString();
     String[] ipArray = message.split("\\.");
 
-    //InputValidation
-    boolean check = isValid(ipArray);
+    // InputValidation
+    boolean check = isValidIp(ipArray);
     if (check == false) {
       return;
     }
 
-    //Get Netmask From Spinner
+    // Get Netmask From Spinner
     Spinner spinner = findViewById(R.id.subnet_spinner);
     String spinnerItem = spinner.getSelectedItem().toString();
 
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
     String cutBinary = subnetCalc.trimCidrIp(ipBinary, cidr);
     String ipFormatted = subnetCalc.ipBinaryToFormat(cutBinary);
 
-    //extra periods fix
     message = subnetCalc.ipBinaryToFormat(ipBinary);
 
     if (ipFormatted.equals(message)){
@@ -94,87 +94,91 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
       intent.putExtra(IP_STRING_MESSAGE, message);
       intent.putExtra(CIDR_NETMASK_MESSAGE, spinnerItem);
       startActivity(intent);
+
     } else {
-      //Ask user if adjustment is ok
+      // Request user input if suggested adjustment is ok before continuing
       IpAdjustmentDialogFragment dialogFragment = IpAdjustmentDialogFragment.newInstance(message, ipFormatted, spinnerItem);
       dialogFragment.show(getSupportFragmentManager(), "DIALOG_FRAGMENT");
     }
   }
 
-  //Reset input
+
+  //** Reset input */
   public void clearInput(View view){
     inputTextView.setText("");
     spinner.setSelection(defaultNetmask);
   }
 
-  //Validate Input
-  private boolean isValid(String[] array) {
-    //Number of Tokens
+
+  //** Validate provided IP is within expected parameters. */
+  private boolean isValidIp(String[] array) {
+    // Number of Tokens
     if (array.length != 4) {
       Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
       return false;
     }
 
-    //String array to Integer array for checks
     Integer[] intArray = new Integer[4];
     for (int i = 0; i < array.length; i++) {
+      // Validate integer and set to intArray
       try {
         intArray[i] = Integer.parseInt(array[i]);
+
       } catch (NumberFormatException nfe) {
         Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
         return false;
       }
-    }
 
-    //First Section of IP cannot be zero
-    if (intArray[0] == 0) {
-      Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
-      return false;
-    }
+      // First Token of IP cannot be zero
+      if (intArray[0] == 0) {
+        Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
+        return false;
+      }
 
-    //Testing bounds for valid input
-    for (int i = 0; i < intArray.length; i++) {
+      // Validate bounds
       if ( intArray[i] >= 256 ) {
         Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
         return false;
+
       } else if (intArray[i] < 0) {
         Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
         return false;
       }
     }
+
     return true;
   }
 
+
+  /** User declares intent with valid ip/cidr, transitioning to Splitter Activity. */
   @Override
   public void onDialogPositiveClick(DialogFragment dialog, String ipAddress, String cidr) {
-    //Intent
     Intent intent = new Intent( this, SplitterActivity.class);
     intent.putExtra(IP_STRING_MESSAGE, ipAddress);
     intent.putExtra(CIDR_NETMASK_MESSAGE, cidr);
+
     startActivity(intent);
     dialog.dismiss();
   }
 
+
+  //** User declares adjusted IP is not valid. */
   @Override
   public void onDialogNegativeClick(DialogFragment dialog) {
     dialog.dismiss();
   }
 
+
+  //** Generates CIDR reference table values. */
   private void setupTableValues(){
     bitsArr = new String[25];
     netmaskArr = new String[25];
     hostsArr = new String[25];
 
-    //Generate CIDR 8-32 Values
     for(int i = 8; i <= 32; i++){
       bitsArr[i-8] = "/" + i;
       netmaskArr[i-8] = subnetCalc.subnetMask(i);
       hostsArr[i-8] = String.valueOf(subnetCalc.numberOfHosts(i));
     }
-  }
-
-  private void setupList() {
-    ArrayAdapter aa = new CheatsheetArrayAdapter(this, bitsArr, netmaskArr, hostsArr);
-    list.setAdapter(aa);
   }
 }
