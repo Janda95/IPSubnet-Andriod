@@ -9,12 +9,14 @@ import android.widget.TextView;
 
 import com.jlrutilities.subnetapp.R;
 
+//** Allows subnet context to be passed and reference view information. */
 public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
   private final String[] bitsArr;
   private final String[] netmaskArr;
   private final String[] hostsArr;
 
+  //** Constructor for passing and referencing current subnet tree information. */
   public CheatsheetArrayAdapter(Context context, String[] values, String[] netmaskArr, String[] hostsArr) {
     super(context, -1, values);
     this.context = context;
@@ -23,6 +25,7 @@ public class CheatsheetArrayAdapter extends ArrayAdapter<String> {
     this.hostsArr = hostsArr;
   }
 
+  //** Sets subnet information in view. */
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     LayoutInflater inflater = (LayoutInflater) context

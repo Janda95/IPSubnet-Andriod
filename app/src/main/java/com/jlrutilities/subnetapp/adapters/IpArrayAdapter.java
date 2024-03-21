@@ -9,12 +9,14 @@ import android.widget.TextView;
 
 import com.jlrutilities.subnetapp.R;
 
+//** Allows Ip information to be passed and reference view information. */
 public class IpArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
   private final String[] values;
   private final int[] cidrArr;
   private final int[] hosts;
 
+  //** Constructor for passing and referencing current IPv4 network information. */
   public IpArrayAdapter(Context context, String[] values, int[] cidr, int[] hosts) {
     super(context, -1, values);
     this.context = context;
@@ -23,6 +25,7 @@ public class IpArrayAdapter extends ArrayAdapter<String> {
     this.hosts = hosts;
   }
 
+  //** Sets IPv4 network information in view. */
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     LayoutInflater inflater = (LayoutInflater) context
