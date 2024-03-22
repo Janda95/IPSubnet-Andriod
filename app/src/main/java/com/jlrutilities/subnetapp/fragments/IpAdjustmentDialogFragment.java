@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jlrutilities.subnetapp.R;
 
+//** Creates and populates Ip adjusted dialog. */
 public class IpAdjustmentDialogFragment extends DialogFragment{
 
   private static final String OG_IP_KEY = "og_ip_key";
@@ -23,9 +24,9 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
   private String adjustedIp;
   private String cidr;
 
-  // Use this instance of the interface to deliver action events
   IpAdjustmentDialogListener listener;
 
+  //** Defines listener interface. */
   public interface IpAdjustmentDialogListener {
     public void onDialogPositiveClick(DialogFragment dialog, String ipAddress, String cidr);
     public void onDialogNegativeClick(DialogFragment dialog);
@@ -33,19 +34,19 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
 
   public IpAdjustmentDialogFragment(){}
 
+  //** Populates fragment instance. */
   public static IpAdjustmentDialogFragment newInstance(String originalIp, String adjustedIp, String cidr) {
-
     Bundle args = new Bundle();
     args.putString(OG_IP_KEY, originalIp);
     args.putString(ADJ_IP_KEY, adjustedIp);
     args.putString(CIDR_KEY, cidr);
-
 
     IpAdjustmentDialogFragment fragment = new IpAdjustmentDialogFragment();
     fragment.setArguments(args);
     return fragment;
   }
 
+  /** Attatches listener to context. */
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
@@ -53,6 +54,7 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
     try {
       // Instantiate the NoticeDialogListener so we can send events to the host
       listener = (IpAdjustmentDialogListener) context;
+
     } catch (ClassCastException e) {
       // The activity doesn't implement the interface, throw exception
       throw new ClassCastException(getActivity().toString()
@@ -60,7 +62,7 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
     }
   }
 
-
+  /** Sets placeholder IP informatino. */
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -70,6 +72,7 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
     cidr = args.getString(CIDR_KEY);
   }
 
+  /** Generates IP comparison for provided CIDR before intent switch. */
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -86,13 +89,16 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
     TextView explanationTv = content.findViewById(R.id.dialog_adjusted_ip_explanation);
     oGTextView.setText(originalIp);
     adjTextView.setText(adjustedIp);
+
     String explanation = "Ip address has been adjusted to match the CIDR: /"+ cidr +". Would you like to continue?";
     explanationTv.setText(explanation);
 
     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
         (dialog, which) -> listener.onDialogPositiveClick(this, adjustedIp, cidr));
+
     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
         (dialog, which) -> listener.onDialogNegativeClick(this));
+
     alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
       @Override
       public void onShow(DialogInterface arg0) {
@@ -100,14 +106,13 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextSize(18);
       }
     });
+
     return alertDialog;
   }
 
-  public String getCidr() {
-    return cidr;
-  }
+  /** Returns CIDR. */
+  public String getCidr() { return cidr; }
 
-  public String getAdjustedIp(){
-    return adjustedIp;
-  }
+  /** Returns suggested adjusted IP based on CIDR provided */
+  public String getAdjustedIp() { return adjustedIp; }
 }

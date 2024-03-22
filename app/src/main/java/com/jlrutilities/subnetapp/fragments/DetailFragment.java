@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.jlrutilities.subnetapp.R;
 import com.jlrutilities.subnetapp.models.Node;
 
-
+//** Sets text for Detail fragment view items. */
 public class DetailFragment extends Fragment {
 
   public static final String NODE_KEY = "node_key";
@@ -24,11 +24,10 @@ public class DetailFragment extends Fragment {
   private TextView netmaskTv;
   private TextView broadcastTv;
 
-  public DetailFragment() {
-  }
+  public DetailFragment() {}
 
+  //** Generates detail fragment using parcelable node. */
   public static DetailFragment newInstance(Node node){
-
     Bundle args = new Bundle();
     args.putParcelable(NODE_KEY, node);
 
@@ -39,10 +38,9 @@ public class DetailFragment extends Fragment {
   }
 
   @Override
-  public void onCreate(Bundle savedInstanceState){
-    super.onCreate(savedInstanceState);
-  }
+  public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
+  //** Sets text for fragment view items. */
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

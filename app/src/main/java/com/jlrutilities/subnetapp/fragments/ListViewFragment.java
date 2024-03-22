@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 
 import com.jlrutilities.subnetapp.R;
 
+//** Creates and populates list view fragment. */
 public class ListViewFragment extends Fragment {
 
   private static final String TAG = "ListViewFragment";
 
-  public ListViewFragment(){ }
+  public ListViewFragment(){}
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 
 import com.jlrutilities.subnetapp.R;
 
+//** Creates help dialog fragment. */
 public class HelpDialogFragment extends DialogFragment {
 
   public HelpDialogFragment(){}
@@ -21,11 +22,13 @@ public class HelpDialogFragment extends DialogFragment {
 
     LayoutInflater inflater = requireActivity().getLayoutInflater();
 
-    //Custom Dialog fragment for persistence
+    // Custom Dialog fragment used for persistance
     AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
     alertDialog.setView(inflater.inflate(R.layout.dialog_help, null));
+
     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
         (dialog, which) -> dialog.dismiss());
+
     alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
       @Override
       public void onShow(DialogInterface arg0) {
@@ -35,5 +38,4 @@ public class HelpDialogFragment extends DialogFragment {
 
     return alertDialog;
   }
-
 }

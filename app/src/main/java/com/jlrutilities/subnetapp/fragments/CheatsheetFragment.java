@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.jlrutilities.subnetapp.R;
 
+//** Sets text for Cheatsheet fragment view items.  */
 public class CheatsheetFragment extends Fragment {
 
-  public CheatsheetFragment(){
-  }
+  public CheatsheetFragment() {}
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
