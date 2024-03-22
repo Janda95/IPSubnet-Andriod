@@ -3,8 +3,8 @@ package com.jlrutilities.subnetapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/** Binary Tree Nodes to support subnet binary tree structure. */
 public class Node implements Parcelable {
-  // Values
   private String ipAddress;
   private String ipBinary;
   private String broadcastIp;
@@ -14,11 +14,10 @@ public class Node implements Parcelable {
   private int cidr;
   private int numberOfHosts;
 
-  // Child nodes
   private Node left;
   private Node right;
 
-  //Constructors
+  //** Creates node using calculated subnet information. */
   public Node(int cidr, String ipBinary, String ipAddress, int numberOfHosts, String broadcastIp, String fullIpRange, String usableIpRange, String netmask) {
     this.cidr = cidr;
     this.ipBinary = ipBinary;
@@ -33,7 +32,7 @@ public class Node implements Parcelable {
     right = null;
   }
 
-  //setters
+  //** Setters */
   public void setLeft(int cidr, String ipBinary, String ipAddress, int numberOfHosts, String broadcastIp, String fullIpRange, String usableIpRange, String netmask){
     left = new Node(cidr, ipBinary, ipAddress, numberOfHosts, broadcastIp, fullIpRange, usableIpRange, netmask);
   }
@@ -42,18 +41,12 @@ public class Node implements Parcelable {
     right = new Node(cidr, ipBinary, ipAddress, numberOfHosts, broadcastIp, fullIpRange, usableIpRange, netmask);
   }
 
-  //getters
-  public int getCidr(){
-    return cidr;
-  }
+  /** Getters */
+  public int getCidr(){ return cidr; }
 
-  public String getIpBinary(){
-    return ipBinary;
-  }
-
-  public String getIpAddress(){
-    return ipAddress;
-  }
+  public String getIpBinary(){ return ipBinary; }
+  
+  public String getIpAddress(){ return ipAddress; }
 
   public int getNumberOfHosts() { return numberOfHosts; }
 
@@ -65,19 +58,16 @@ public class Node implements Parcelable {
 
   public String getNetmask() { return netmask; }
 
-  public Node getLeft(){
-    return left;
-  }
+  public Node getLeft(){ return left; }
 
-  public Node getRight(){
-    return right;
-  }
+  public Node getRight(){ return right; }
 
   public void setChildrenNull(){
     left = null;
     right = null;
   }
 
+  //** Passes and persists node information between views. */
   protected Node(Parcel in) {
     ipAddress = in.readString();
     ipBinary = in.readString();
@@ -91,11 +81,13 @@ public class Node implements Parcelable {
     right = (Node) in.readValue(Node.class.getClassLoader());
   }
 
+  //** Information provided 
   @Override
   public int describeContents() {
     return 0;
   }
 
+  //** Writes current node information using parcel destination. */
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(ipAddress);
@@ -110,6 +102,7 @@ public class Node implements Parcelable {
     dest.writeValue(right);
   }
 
+  //** Creates setup to pass Node array information relative to tree structure from node location. */
   @SuppressWarnings("unused")
   public static final Parcelable.Creator<Node> CREATOR = new Parcelable.Creator<Node>() {
     @Override
