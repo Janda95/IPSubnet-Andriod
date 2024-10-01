@@ -192,7 +192,7 @@ public class SplitterActivity extends AppCompatActivity {
     numOfHostsArr = new int[nodeIps.length];
 
     for(int i = 0; i < nodes.length; i++){
-      nodes[i] = tree.nthPreordernode(i+1);
+      nodes[i] = tree.nthPreorderNode(i+1);
     }
 
     int counter = 0;
