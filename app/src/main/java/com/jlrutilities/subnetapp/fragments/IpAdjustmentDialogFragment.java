@@ -90,7 +90,7 @@ public class IpAdjustmentDialogFragment extends DialogFragment{
     oGTextView.setText(originalIp);
     adjTextView.setText(adjustedIp);
 
-    String explanation = "Ip address has been adjusted to match the CIDR: /"+ cidr +". Would you like to continue?";
+    String explanation = "Adjusted IP address for /"+ cidr +".\n\nWould you like to continue?";
     explanationTv.setText(explanation);
 
     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",

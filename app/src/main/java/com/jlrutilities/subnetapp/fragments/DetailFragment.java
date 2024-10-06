@@ -58,15 +58,21 @@ public class DetailFragment extends Fragment {
     String ipNetmask = node.getNetmask();
     String ipStr =  node.getIpAddress() + "/" + node.getCidr();
     String numHostsStr = "" + node.getNumberOfHosts();
+
     String ipRange = node.getFullIpRange();
-    String usableRange = node.getUsableIpRange();
+    String fullRange[] = ipRange.split("-");
+    ipRange = fullRange[0].trim() + "-\n" + fullRange[1].trim();
+
+    String usableIpRange = node.getUsableIpRange();
+    String usableRange[] = usableIpRange.split("-");
+    usableIpRange = usableRange[0].trim() + " -\n" + usableRange[1].trim();
 
     broadcastTv.setText( broadcast );
     netmaskTv.setText( ipNetmask );
     ipTv.setText( ipStr );
     hostsTv.setText( numHostsStr );
     addressRangeTv.setText( ipRange );
-    usableRangeTv.setText( usableRange );
+    usableRangeTv.setText( usableIpRange );
 
     return rootView;
   }

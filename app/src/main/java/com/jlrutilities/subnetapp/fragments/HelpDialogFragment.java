@@ -22,7 +22,7 @@ public class HelpDialogFragment extends DialogFragment {
 
     LayoutInflater inflater = requireActivity().getLayoutInflater();
 
-    // Custom Dialog fragment used for persistance
+    // Custom Dialog fragment used for persistence
     AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
     alertDialog.setView(inflater.inflate(R.layout.dialog_help, null));
 

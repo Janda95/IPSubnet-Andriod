@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
   private boolean isValidIp(String[] array) {
     // Number of Tokens
     if (array.length != 4) {
-      Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
+      Toast.makeText(getApplicationContext(),"Invalid IP", Toast.LENGTH_SHORT).show();
       return false;
     }
 
@@ -125,23 +125,23 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
         intArray[i] = Integer.parseInt(array[i]);
 
       } catch (NumberFormatException nfe) {
-        Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Invalid IP", Toast.LENGTH_SHORT).show();
         return false;
       }
 
       // First Token of IP cannot be zero
       if (intArray[0] == 0) {
-        Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Invalid IP", Toast.LENGTH_SHORT).show();
         return false;
       }
 
       // Validate bounds
       if ( intArray[i] >= 256 ) {
-        Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Invalid IP", Toast.LENGTH_SHORT).show();
         return false;
 
       } else if (intArray[i] < 0) {
-        Toast.makeText(getApplicationContext(),"IP Invalid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Invalid IP", Toast.LENGTH_SHORT).show();
         return false;
       }
     }
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements IpAdjustmentDialo
     for(int i = 8; i <= 32; i++){
       bitsArr[i-8] = "/" + i;
       netmaskArr[i-8] = subnetCalc.subnetMask(i);
-      hostsArr[i-8] = String.valueOf(subnetCalc.numberOfHosts(i));
+      hostsArr[i-8] = String.format("%,d", subnetCalc.numberOfHosts(i));
     }
   }
 }

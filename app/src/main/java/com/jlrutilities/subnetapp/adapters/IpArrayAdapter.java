@@ -37,8 +37,7 @@ public class IpArrayAdapter extends ArrayAdapter<String> {
     TextView hostsTv = rowView.findViewById(R.id.hostsTv);
 
     String cidrStr = Integer.toString(cidrArr[position]);
-    String hostsStr = "Usable Hosts: " + hosts[position];
-
+    String hostsStr = String.format("Usable Hosts: %,d", hosts[position]);
     ipTv.setText(values[position]);
     cidrTv.setText("/" + cidrStr);
     hostsTv.setText(hostsStr);

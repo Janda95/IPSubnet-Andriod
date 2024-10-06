@@ -23,37 +23,37 @@
             android:id="@+id/bits_column"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:layout_margin="16dp"
+            android:layout_weight="1"
             android:text="@string/bits_table_title"
+            android:textAlignment="textEnd"
             android:textColor="@color/colorDefaultText"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/netmask_column"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
             android:layout_margin="16dp"
+            android:layout_weight="3"
             android:text="@string/netmask_table_title"
+            android:textAlignment="center"
+            android:textColor="@color/colorDefaultText"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorDefaultText"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/hosts_column"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.0"
             android:layout_margin="16dp"
+            android:layout_weight="2"
             android:text="@string/usable_hosts_table_title"
+            android:textAlignment="center"
+            android:textColor="@color/colorDefaultText"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorDefaultText"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView

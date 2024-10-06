@@ -26,10 +26,10 @@
     <string name="usable_hosts_table_title">Usable Hosts</string>
     <string name="netmask_table_title">Netmask</string>
     <string name="help">Help</string>
-    <string name="dialog_text_swipe_left">Swipe Left to Merge IP Address</string>
-    <string name="dialog_text_swipe_right">Swipe Right to Split IP Address</string>
+    <string name="dialog_text_swipe_left">Swipe Left to Merge IP Address with its Pair</string>
+    <string name="dialog_text_swipe_right">Swipe Right to Divide IP Address into Two Parts</string>
     <string name="dialog_title">Help!</string>
-    <string name="dialog_text_tap">Tap for More Info</string>
+    <string name="dialog_text_tap">Tap for More Detailed Information about the Network</string>
     <string name="ip_dialog_explanation">Adjusted Ip Dialog Explanation</string>
     <string name="ip_address_label">IP Address</string>
     <string name="mask_bits_label">Mask Bits</string>
