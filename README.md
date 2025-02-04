@@ -10,7 +10,7 @@ The current version is available on the Google Play app store for personal use. 
 
 [IPv4 Google Play Store Link](https://play.google.com/store/apps/details?id=com.jlrutilities.subnetapp)
 
-Originally a personal project for father, who requested an application for a mobile subnet calculator, drawing inspiration from the [Visual Subnet Calculator](http://www.davidc.net/sites/default/subnets/subnets.htm) web application.
+An android application which calculates subnet manipulation drawing inspiration from the [Visual Subnet Calculator](http://www.davidc.net/sites/default/subnets/subnets.htm) web application.
 
 ## Development environment
 
