@@ -10,7 +10,7 @@ import com.jlrutilities.subnetapp.R
 
 
 //** Allows Ip information to be passed and reference view information. */
-class IpArrayAdapter(
+class IpArrayAdapter__(
         context: Context,
         values: Array<String>,
         cidr: IntArray,

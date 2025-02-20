@@ -10,7 +10,7 @@ import com.jlrutilities.subnetapp.R
 
 
 //** Allows subnet context to be passed and reference view information. */
-class CheatsheetArrayAdapter(
+class CheatsheetArrayAdapter__(
         context: Context,
         values: Array<String>,
         netmaskArr: Array<String>,
